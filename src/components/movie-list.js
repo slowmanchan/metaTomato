@@ -15,6 +15,7 @@ class MovieList extends Component {
            <img
              style={{'width': '200px', 'height': '300px'}}
              key={idx}
+             id={movie.imdbID}
              src={movie.Poster}
            />
        )
