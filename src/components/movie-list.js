@@ -4,17 +4,20 @@ import { fetchMovies } from '../actions';
 
 class MovieList extends Component {
   componentDidMount() {
-    this.props.fetchMovies('blade runner')
+    this.props.fetchMovies('war')
 
   }
 
   render() {
     const movies = this.props.movies.map((movie, idx) => {
-       return (<li key={idx}>{movie.Title}</li>)
+       return (
+           <img style={{'width': '200px', 'height': '300px'}} key={idx} src={movie.Poster}/>
+       )
     })
-    console.log(this.props.movies)
+    console.log('Index Comp', this.props.movies)
     return (
       <div>
+        <h3>Search Results</h3>
         <ul>
           { movies }
         </ul>
