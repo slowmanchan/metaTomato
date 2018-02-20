@@ -6,6 +6,7 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
 import ReduxPromise from 'redux-promise';
 import MovieList from './components/movie-list';
+import MovieShow from './components/movie-show';
 
 import reducers from './reducers';
 
@@ -17,7 +18,9 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <Switch>
+	    <Route path='/movie/:id' component={MovieShow} />
         <Route path='/' component={MovieList} />
+	    
       </Switch>
     </BrowserRouter>
   </Provider>
