@@ -4,32 +4,38 @@ import { fetchMovies } from '../actions';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/search-bar';
 
+
 class MovieList extends Component {
   componentDidMount() {
-    this.props.fetchMovies('movie')
-
+    !this.props.moviesList ? this.props.fetchMovies('movie') : null
   }
 
   render() {
-    const movies = this.props.movies.map((movie, idx) => {
-       return (
+	const { moviesList } = this.props
+	if (!moviesList) {
+		return (
+		<div>Loading...</div>
+		)
+	}
+	
+    const movies = moviesList.map((movie, idx) => {
+    return (
 	     <Link key={idx} to={`/movie/${movie.imdbID}`}> 
            <img
              style={{'width': '200px', 'height': '300px'}}
              id={movie.imdbID}
-             src={movie.Poster}
+           src={movie.Poster}
            />
 		  </Link>
-       )
+      )
     })
-    console.log('Index Comp', this.props.movies)
+
     return (
       <div>
         <SearchBar/>
         <h3>Search Results</h3>
-
         <ul>
-          { movies }
+		  {movies}
         </ul>
       </div>
     )
@@ -38,7 +44,7 @@ class MovieList extends Component {
 
 function mapStateToProps(state) {
   return {
-    movies: state.movies
+     moviesList: state.movies.moviesList
   }
 }
 

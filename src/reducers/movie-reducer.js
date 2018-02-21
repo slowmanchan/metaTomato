@@ -1,11 +1,13 @@
 import { FETCH_MOVIES, FETCH_MOVIE } from '../actions/index';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch(action.type) {
     case FETCH_MOVIES:
-      return [action.payload.data.Search][0]
+	  console.log(state)
+      return { ...state, moviesList: action.payload.data.Search}
 	case FETCH_MOVIE:
-	  return {movie: action.payload.data };
+	  console.log(action.payload.data)
+	  return { ...state, selectedMovie: action.payload.data };
     default:
       return state;
   }
