@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIE = 'FETCH_MOVIE';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
 
 const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
@@ -22,5 +23,14 @@ export function fetchMovie(id) {
 	return {
 		type: FETCH_MOVIE,
 		payload: request
+	}
+}
+
+export function addFavorite(movie) {
+	window.localStorage.setItem('favorites ' + movie.Title, JSON.stringify(movie))
+	
+	return {
+		type: ADD_FAVORITE,
+		payload: movie
 	}
 }

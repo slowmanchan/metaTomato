@@ -32,6 +32,7 @@ class MovieList extends Component {
 
     return (
       <div>
+	    <Link to={'/favorites'} >Favorites</Link>
         <SearchBar/>
         <h3>Search Results</h3>
         <ul>

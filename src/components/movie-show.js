@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovie } from '../actions';
 import { Link } from 'react-router-dom';
+import AddFavorite from './add-favorite';
 
 class MovieShow extends Component {
 	componentDidMount() {
@@ -44,6 +45,9 @@ class MovieShow extends Component {
 					<h3>Box office</h3>
 					<p>{movie.BoxOffice}</p>
 				  </div>
+				  <AddFavorite 
+				    movie={this.props.movie}
+				  />
 			  </div>
 		  </div>
 		)		
