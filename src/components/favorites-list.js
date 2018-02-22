@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import { connect } from 'react-redux'
+import { deleteFavorite, fetchFavorites } from '../actions';
 
-const FavoritesList = () => {
-	var values = _.values(localStorage);
+class FavoritesList extends Component {
+	componentDidMount() {
+		this.props.fetchFavorites()
+	}
 	
-	const favorites = values.map((favorite) => {
-		return <img src={JSON.parse(favorite).Poster} />
+	render() {
+	  const { favorites } = this.props
+	  const favoritesList = favorites.map((favorite) => {
+	
+		return (
+		  <div className='card'>
+		    <img className='card-img-top img-fluid' src={favorite.Poster} />
+			<div className='card-block text-center'>
+			  <h4 className='card-title'>{favorite.Title}</h4>
+			  <button 
+			    onClick={() => this.props.deleteFavorite(favorite)}
+			    className='btn btn-primary btn-danger'
+			  >
+			  Delete
+			  </button>
+			</div>
+		  </div>
+		)
 	})
-
+    
 	return (
-		<div>
+	    <div >
 		<Link to={'/'} >Back</Link>
 		<h2>Favorites</h2>
+		  <div className='card-columns'>
 		  {favorites}
+		  </div>
 		</div>
-	)
+	  )
+	}
 }
 
-export default FavoritesList;
+function mapStateToProps(state) {
+	return {
+		favorites: state.movies.favorites
+	}
+}
+export default connect(mapStateToProps, { deleteFavorite, fetchFavorites })(FavoritesList);
