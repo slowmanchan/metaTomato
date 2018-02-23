@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../actions';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/search-bar';
-import NavBar from '../components/nav-bar';
+
 
 class MovieList extends Component {
   componentDidMount() {
@@ -20,34 +20,23 @@ class MovieList extends Component {
 	
     const movies = moviesList.map((movie, idx) => {
     return (
-
-	      <Link key={idx} to={`/movie/${movie.imdbID}`}> 
-		    <div className='card text-center'>
-				   <img
-					 className='card-img-top img-fluid'
-					 id={movie.imdbID}
-					 src={movie.Poster}
-				   />
-		      <div className='card-block'>
-		       <h4 className='card-title'>{movie.Title}</h4>
-			  </div>
-			 </div>
+	     <Link key={idx} to={`/movie/${movie.imdbID}`}> 
+           <img
+             style={{'width': '200px', 'height': '300px'}}
+             id={movie.imdbID}
+           src={movie.Poster}
+           />
 		  </Link>
-		
       )
     })
 
     return (
-   <div>
-   
-
-	    <Link to={'/favorites'} >Favorites</Link>
+      <div>
         <SearchBar/>
-		   
         <h3>Search Results</h3>
-        <div className='card-columns'>
+        <ul>
 		  {movies}
-        </div>
+        </ul>
       </div>
     )
   }
