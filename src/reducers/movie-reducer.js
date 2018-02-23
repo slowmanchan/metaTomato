@@ -1,4 +1,5 @@
 import { FETCH_MOVIES, FETCH_MOVIE, ADD_FAVORITE, DELETE_FAVORITE, FETCH_FAVORITES } from '../actions/index';
+import _ from 'lodash';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -12,12 +13,13 @@ export default function(state = {}, action) {
 	  const favorites = []
 	  return { ...state, favoritesList: favorites.push(action.payload)}
 	case DELETE_FAVORITE:
+    console.log(state.favorites)
 
-	  return { ...state, favorites: action.payload }
+	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav.Title === action.payload})}
 	case FETCH_FAVORITES:
 	  console.log(action.payload)
-	  return { ...state }
-    default:
+	  return { ...state, favorites: action.payload }
+  default:
       return state;
   }
 }

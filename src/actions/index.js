@@ -22,7 +22,7 @@ export function fetchMovies(movie) {
 
 export function fetchMovie(id) {
 	const request = axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
-	
+
 	return {
 		type: FETCH_MOVIE,
 		payload: request
@@ -30,29 +30,35 @@ export function fetchMovie(id) {
 }
 
 export function addFavorite(movie) {
-	window.localStorage.setItem('favorites ' + movie.Title, JSON.stringify(movie))
-	
+	window.localStorage.setItem(movie.Title, JSON.stringify(movie))
+
 	return {
 		type: ADD_FAVORITE,
 		payload: movie
 	}
 }
 
-export function deleteFavorite(movie) {
-	window.localStorage.removeItem(movie.Title);
-	
+export function deleteFavorite(favorite) {
+	window.localStorage.removeItem(favorite.Title);
+
 	return {
 		type: DELETE_FAVORITE,
-		payload: movie
+		payload: favorite.Title
 	}
 }
 
 export function fetchFavorites() {
 	var values = _.values(localStorage);
-	var valuesParsed = values.map((value) => {
-	  return JSON.parse(value)
+	var valuesParsed = values.filter((value) => {
+     try {
+         JSON.parse(value);
+     } catch (e) {
+         return false
+     }
+     return true
 	})
-	
+  .map((value) => JSON.parse(value))
+
 	return {
 		type: FETCH_FAVORITES,
 		payload: valuesParsed

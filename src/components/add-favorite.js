@@ -9,8 +9,8 @@ class AddFavorite extends Component {
     return(
 	  <button
 	    onClick={() => this.props.addFavorite(this.props.movie)}
-	  >
-	  Add Fav
+   >
+      Add Fav
 	  </button>
 	)
   }

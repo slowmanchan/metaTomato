@@ -17,36 +17,34 @@ class MovieList extends Component {
 		<div>Loading...</div>
 		)
 	}
-	
+
     const movies = moviesList.map((movie, idx) => {
     return (
 
-	      <Link key={idx} to={`/movie/${movie.imdbID}`}> 
-		    <div className='card text-center'>
-				   <img
-					 className='card-img-top img-fluid'
-					 id={movie.imdbID}
-					 src={movie.Poster}
-				   />
-		      <div className='card-block'>
-		       <h4 className='card-title'>{movie.Title}</h4>
-			  </div>
-			 </div>
+	      <Link key={idx} to={`/movie/${movie.imdbID}`}>
+          <div className='card text-center'>
+            <img
+              className='card-img-top img-fluid'
+              id={movie.imdbID}
+              src={movie.Poster}
+            />
+            <div className='card-block'>
+              <h4 className='card-title'>{movie.Title}</h4>
+            </div>
+          </div>
 		  </Link>
-		
+
       )
     })
 
     return (
    <div>
-   
+     <Link to={'/favorites'} >Favorites</Link>
+     <SearchBar/>
 
-	    <Link to={'/favorites'} >Favorites</Link>
-        <SearchBar/>
-		   
-        <h3>Search Results</h3>
-        <div className='card-columns'>
-		  {movies}
+     <h3>Search Results</h3>
+     <div className='card-columns'>
+       {movies}
         </div>
       </div>
     )
