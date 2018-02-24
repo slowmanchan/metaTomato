@@ -11,6 +11,7 @@ class MovieList extends Component {
   }
 
   render() {
+    console.log(this.props)
 	const { moviesList } = this.props
 	if (!moviesList) {
 		return (
@@ -38,16 +39,13 @@ class MovieList extends Component {
     })
 
     return (
-   <div>
-
-     <Link to={'/favorites'} >Favorites</Link>
-     <SearchBar/>
+   <div className='container'>
 
      <h3>Search Results</h3>
-     <div className='card-columns'>
+
        {movies}
-        </div>
-      </div>
+
+   </div>
     )
   }
 }

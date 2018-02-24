@@ -11,8 +11,9 @@ const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
 
 
-export function fetchMovies(movie) {
+export function fetchMovies(movie, callback) {
   const request = axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)
+
 
   return {
     type: FETCH_MOVIES,
@@ -22,7 +23,6 @@ export function fetchMovies(movie) {
 
 export function fetchMovie(id) {
 	const request = axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
-
 	return {
 		type: FETCH_MOVIE,
 		payload: request
@@ -43,7 +43,7 @@ export function deleteFavorite(favorite) {
 
 	return {
 		type: DELETE_FAVORITE,
-		payload: favorite.Title
+		payload: favorite
 	}
 }
 

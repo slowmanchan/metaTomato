@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../actions'
+import { LinkContainer, InputGroup, Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -15,39 +16,40 @@ class SearchBar extends Component {
   handleInputChange(e) {
     const { value } = e.target
     this.setState({ value })
+
   }
 
   handleSubmit(e) {
+
     e.preventDefault()
     this.props.fetchMovies(this.state.value)
   }
 
   render() {
+
     return (
-      <div>
-        <form
-          className='input-group'
-          onSubmit={this.handleSubmit}
+      <FormGroup>
+
+        <FormControl
+          type="text"
+          placeholder="Search for a movie...."
+          value={this.state.value}
+          onChange={this.handleInputChange}
+        />{' '}
+
+        <Button
+
+          type="submit"
+          onClick={this.handleSubmit}
+          title='action'
         >
-          <input
-            placeholder='Search for a movie meng.....'
-            className='form-control'
-            type='text'
-            value={this.state.value}
-            onChange={this.handleInputChange}
-          />
-          <span className='input-group-btn'>
-            <button
-              className='btn btn-primary'
-              type='submit'
-            >
-              >
-            </button>
-          </span>
-        </form>
-      </div>
+          go
+        </Button>
+
+      </FormGroup>
     )
   }
 }
+
 
 export default connect(null, { fetchMovies })(SearchBar);

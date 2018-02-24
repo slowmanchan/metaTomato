@@ -10,8 +10,10 @@ import MovieShow from './components/movie-show';
 import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
 import Navbar from './components/nav-bar';
+import Home from './components/home';
 
 require('../style/style.scss')
+require('../style/bootstrap.scss')
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -21,6 +23,8 @@ ReactDOM.render(
       <div>
         <Navbar/>
         <Switch>
+
+          <Route path='/search-results' component={MovieList} />
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/movie/:id' component={MovieShow} />
           <Route path='/' component={MovieList} />
