@@ -43,7 +43,7 @@ export function deleteFavorite(favorite) {
 
 	return {
 		type: DELETE_FAVORITE,
-		payload: favorite.Title
+		payload: favorite
 	}
 }
 

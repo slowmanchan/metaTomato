@@ -1,5 +1,5 @@
 body {
-  background-color: #323330;
+  background-color: black;
   color: #ffdb58;
 }
 
@@ -11,15 +11,12 @@ form {
   margin: 20px;
 
 }
-
-.card, h4{
-	color: #323330;
-}
 .btn-primary {
   background-color: #ffdb58;
   border-color: #ffdb58;
   color: black;
 }
+
 
 @media (min-width: 34em) {
     .card-columns {

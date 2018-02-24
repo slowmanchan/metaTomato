@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../actions';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/search-bar';
-import NavBar from '../components/nav-bar';
+
 
 class MovieList extends Component {
   componentDidMount() {
@@ -21,6 +21,7 @@ class MovieList extends Component {
     const movies = moviesList.map((movie, idx) => {
     return (
 
+
 	      <Link key={idx} to={`/movie/${movie.imdbID}`}>
           <div className='card text-center'>
             <img
@@ -34,27 +35,45 @@ class MovieList extends Component {
           </div>
 		  </Link>
 
+
+	     <Link key={idx} to={`/movie/${movie.imdbID}`}>
+         <img
+
+             id={movie.imdbID}
+           src={movie.Poster}
+           />
+		  </Link>
+
       )
     })
 
     return (
-   <div>
-     <Link to={'/favorites'} >Favorites</Link>
-     <SearchBar/>
 
-     <h3>Search Results</h3>
-     <div className='card-columns'>
-       {movies}
-        </div>
-      </div>
-    )
+       <div>
+         <Link to={'/favorites'} >Favorites</Link>
+         <SearchBar/>
+
+         <h3>Search Results</h3>
+         <div className='card-columns'>
+           {movies}
+         </div>
+         <div>
+           <SearchBar/>
+           <h3>Search Results</h3>
+           <ul>
+             {movies}
+           </ul>
+
+         </div>
+       </div>
+     )
   }
 }
 
 function mapStateToProps(state) {
-  return {
-     moviesList: state.movies.moviesList
-  }
+       return {
+         moviesList: state.movies.moviesList
+       }
 }
 
 export default connect(mapStateToProps, { fetchMovies })(MovieList);
