@@ -24,8 +24,9 @@ ReactDOM.render(
         <Navbar/>
         <Switch>
 
-          <Route path='/search-results' component={MovieList} />
+
           <Route path='/favorites' component={FavoritesList} />
+          <Route path='/search-results' component={MovieList} />
           <Route path='/movie/:id' component={MovieShow} />
           <Route path='/' component={MovieList} />
 
