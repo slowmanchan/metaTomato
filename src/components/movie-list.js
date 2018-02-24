@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../actions';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/search-bar';
-import NavBar from '../components/nav-bar';
+
 
 class MovieList extends Component {
   componentDidMount() {
@@ -39,6 +39,7 @@ class MovieList extends Component {
 
     return (
    <div>
+
      <Link to={'/favorites'} >Favorites</Link>
      <SearchBar/>
 

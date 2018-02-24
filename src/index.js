@@ -9,6 +9,7 @@ import MovieList from './components/movie-list';
 import MovieShow from './components/movie-show';
 import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
+import Navbar from './components/nav-bar';
 
 require('../style/style.scss')
 
@@ -17,12 +18,15 @@ const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <Switch>
-	    <Route path='/favorites' component={FavoritesList} />
-	    <Route path='/movie/:id' component={MovieShow} />
-        <Route path='/' component={MovieList} />
-	    
-      </Switch>
+      <div>
+        <Navbar/>
+        <Switch>
+          <Route path='/favorites' component={FavoritesList} />
+          <Route path='/movie/:id' component={MovieShow} />
+          <Route path='/' component={MovieList} />
+
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('.root'));

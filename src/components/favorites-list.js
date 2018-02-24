@@ -44,7 +44,7 @@ class FavoritesList extends Component {
 
 	return (
 	    <div >
-				<Link to={'/'} >Back</Link>
+
 				<h2>Favorites</h2>
 				<div className='card-columns'>
 					{favoritesList}
