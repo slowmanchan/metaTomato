@@ -2,9 +2,6 @@
 import { FETCH_MOVIES, FETCH_MOVIE, ADD_FAVORITE, DELETE_FAVORITE, FETCH_FAVORITES } from '../actions/index';
 import _ from 'lodash';
 
-import { FETCH_MOVIES, FETCH_MOVIE } from '../actions/index';
-
-
 export default function(state = {}, action) {
   switch(action.type) {
     case FETCH_MOVIES:

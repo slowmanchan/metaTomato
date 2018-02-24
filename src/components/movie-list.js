@@ -33,16 +33,7 @@ class MovieList extends Component {
               <h4 className='card-title'>{movie.Title}</h4>
             </div>
           </div>
-		  </Link>
-
-
-	     <Link key={idx} to={`/movie/${movie.imdbID}`}>
-         <img
-
-             id={movie.imdbID}
-           src={movie.Poster}
-           />
-		  </Link>
+        </Link>
 
       )
     })

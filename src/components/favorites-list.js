@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
 import { connect } from 'react-redux'
 import { deleteFavorite, fetchFavorites } from '../actions';
 
@@ -11,7 +10,6 @@ class FavoritesList extends Component {
 	}
 
 	render() {
-    console.log(this.props)
 
 	  const { favorites } = this.props
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovie } from '../actions';
 import { Link } from 'react-router-dom';
+import AddFavorite from './add-favorite';
 
 class MovieShow extends Component {
 	componentDidMount() {
@@ -15,7 +16,7 @@ class MovieShow extends Component {
 			  <div>Loading...</div>
 			)
 		}
-		
+
 		const { Ratings } = movie
 		console.log(Ratings)
 		const ratingList = Ratings.map((rating, index) => {
@@ -26,27 +27,28 @@ class MovieShow extends Component {
 		return (
 	      <div>
 		      <div className='row'>
-			    <Link to={'/'}>
-				Back
-				</Link>
-			  </div>
-			  <div className='row'>
-				  <div className='col-xs-4'>
-				    <h1>{movie.Title}</h1>
-					<img src={movie.Poster} />
-					<p>{movie.Released}</p>
-				  </div>
-				  <div className='col-xs-8'>
-				    <h3>Plot</h3>
-				    <p>{movie.Plot}</p>
-					<h3>Ratings</h3>
-					{ratingList}
-					<h3>Box office</h3>
-					<p>{movie.BoxOffice}</p>
-				  </div>
+						<Link to={'/'}>
+							Back
+						</Link>
+					</div>
+					<div className='row'>
+						<div className='col-xs-4'>
+							<h1>{movie.Title}</h1>
+							<img src={movie.Poster} />
+							<p>{movie.Released}</p>
+						</div>
+						<div className='col-xs-8'>
+							<h3>Plot</h3>
+							<p>{movie.Plot}</p>
+							<h3>Ratings</h3>
+							{ratingList}
+							<h3>Box office</h3>
+							<p>{movie.BoxOffice}</p>
+							<AddFavorite movie={movie}/>
+						</div>
 			  </div>
 		  </div>
-		)		
+		)
 	}
 }
 
