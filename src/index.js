@@ -28,7 +28,7 @@ ReactDOM.render(
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/search-results' component={MovieList} />
           <Route path='/movie/:id' component={MovieShow} />
-          <Route path='/' component={MovieList} />
+          <Route path='/' component={Home} />
 
         </Switch>
       </div>

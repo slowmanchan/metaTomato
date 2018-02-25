@@ -5,6 +5,8 @@ body {
 .navbar {
   background-color: #f5da55;
   border-bottom: 3px solid black;
+  margin-bottom: 0;
+  border-radius: 0;
   a {
     color: black !important;
     font-weight: bolder;
@@ -17,4 +19,13 @@ body {
 ul {
   list-style: none;
   padding-left: 0;
+}
+
+.banner {
+  background-color: black;
+  color: #f5da55;
+  h2 {
+    margin: 40px 0;
+    font-weight: bolder;
+  }
 }

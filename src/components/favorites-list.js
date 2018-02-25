@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux'
 import { deleteFavorite, fetchFavorites } from '../actions';
-
+import { Button, ButtonGroup } from 'reactstrap';
 
 class FavoritesList extends Component {
 	componentDidMount() {
@@ -22,7 +22,7 @@ class FavoritesList extends Component {
 	  const favoritesList = favorites.map((favorite, idx) => {
 			return (
 
-					<div className='card'>
+					<div>
 						<img
 							className='card-img-top img-fluid'
 							src={favorite.Poster}
@@ -44,11 +44,17 @@ class FavoritesList extends Component {
 
 	return (
 	    <div >
+				<div className='banner'>
+					<div className='container'>
+						<h2>Favorites</h2>
+					</div>
 
-				<h2>Favorites</h2>
-				<div className='card-columns'>
+				</div>
+				<div>
 					{favoritesList}
 				</div>
+
+
 			</div>
 	  )
 	}

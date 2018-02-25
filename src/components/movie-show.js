@@ -29,7 +29,7 @@ class MovieShow extends Component {
 
 	      <div className='container'>
 		      <div className='row'>
-						<Link to={'/'}>
+						<Link to={'/search-results'}>
 							Back
 						</Link>
 					</div>
@@ -48,7 +48,7 @@ class MovieShow extends Component {
 							{ratingList}
 							<h3>Box office</h3>
 							<p>{movie.BoxOffice}</p>
-							
+
 						</div>
 						<div className='col-xs-4'>
 							<img

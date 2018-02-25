@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../actions'
 import { LinkContainer, InputGroup, Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class SearchBar extends Component {
   }
 
   handleSubmit(e) {
-
     e.preventDefault()
     this.props.fetchMovies(this.state.value)
+    .then(() => this.props.history.push('/search-results'))
   }
 
   render() {
@@ -52,4 +53,4 @@ class SearchBar extends Component {
 }
 
 
-export default connect(null, { fetchMovies })(SearchBar);
+export default withRouter(connect(null, { fetchMovies })(SearchBar));
