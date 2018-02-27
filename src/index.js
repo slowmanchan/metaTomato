@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
@@ -23,6 +24,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Navbar/>
+
+
         <Switch>
 
           <Route path='/favorites' component={FavoritesList} />
@@ -31,6 +34,7 @@ ReactDOM.render(
           <Route path='/' component={Home} />
 
         </Switch>
+        
       </div>
     </BrowserRouter>
   </Provider>
