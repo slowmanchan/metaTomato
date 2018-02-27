@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMovies } from '../actions'
+import { fetchMovies, fetchMoviesThunk } from '../actions'
 import { LinkContainer, InputGroup, Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
@@ -22,7 +22,7 @@ class SearchBar extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.fetchMovies(this.state.value)
+    this.props.fetchMoviesThunk(this.state.value)
     .then(() => this.props.history.push('/search-results'))
   }
 
@@ -53,4 +53,4 @@ class SearchBar extends Component {
 }
 
 
-export default withRouter(connect(null, { fetchMovies })(SearchBar));
+export default withRouter(connect(null, { fetchMovies, fetchMoviesThunk })(SearchBar));

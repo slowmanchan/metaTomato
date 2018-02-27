@@ -11,8 +11,8 @@ import cube from '../icons/cube.gif';
 
 class MovieList extends Component {
   componentDidMount() {
-    !this.props.moviesList ? this.props.fetchMovies('movie') : null;
-    this.props.fetchMoviesThunk('movie')
+    !this.props.moviesList ? this.props.fetchMoviesThunk('movie') : null;
+
   }
 
   render() {
