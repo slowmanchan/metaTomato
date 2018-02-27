@@ -25,6 +25,14 @@ module.exports = {
     {
       test: /\.scss$/,
       loaders: ['style-loader', 'css-loader', 'autoprefixer-loader?browsers=last 2 versions', 'sass-loader'],
+    },
+    {
+      test: /\.(png|jpg|gif)$/,
+      loader: 'file-loader',
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
     }],
   },
   resolve: {

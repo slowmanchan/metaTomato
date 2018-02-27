@@ -1,13 +1,16 @@
-import { FETCH_MOVIES, FETCH_MOVIE, ADD_FAVORITE, DELETE_FAVORITE, FETCH_FAVORITES } from '../actions/index';
+import { FETCH_MOVIES, FETCH_MOVIE, ADD_FAVORITE, DELETE_FAVORITE, FETCH_FAVORITES, REQUEST_FETCH_MOVIES, FETCH_MOVIES_SUCCESS} from '../actions/index';
 import _ from 'lodash';
 
-export default function(state = {}, action) {
+export default function(state = {
+  movieList: [],
+  isLoading: false
+}, action) {
   switch(action.type) {
     case FETCH_MOVIES:
-	  console.log(state)
+
       return { ...state, moviesList: action.payload.data.Search}
   	case FETCH_MOVIE:
-  	  console.log(action.payload.data)
+
   	  return { ...state, selectedMovie: action.payload.data };
   	case ADD_FAVORITE:
   	  const favorites = []
@@ -16,8 +19,14 @@ export default function(state = {}, action) {
 
   	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav.Title === action.payload.Title})}
   	case FETCH_FAVORITES:
-  	  console.log(action.payload)
+
   	  return { ...state, favorites: action.payload }
+    case REQUEST_FETCH_MOVIES:
+
+      return { ...state, isLoading: action.payload}
+    case FETCH_MOVIES_SUCCESS:
+
+      return { ...state, moviesList: action.payload.data.Search, isLoading: false }
     default:
         return state;
   }

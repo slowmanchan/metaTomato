@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMovie } from '../actions';
+import { fetchMovie} from '../actions';
 import { Link } from 'react-router-dom';
 import AddFavorite from './add-favorite';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap'

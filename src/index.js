@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
+import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 import MovieList from './components/movie-list';
 import MovieShow from './components/movie-show';
@@ -15,7 +16,7 @@ import Home from './components/home';
 require('../style/style.scss')
 require('../style/bootstrap.scss')
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk, ReduxPromise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
@@ -23,7 +24,6 @@ ReactDOM.render(
       <div>
         <Navbar/>
         <Switch>
-
 
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/search-results' component={MovieList} />

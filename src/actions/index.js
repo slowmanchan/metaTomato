@@ -6,6 +6,9 @@ export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
+export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES';
+export const FETCH_MOVIES_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
 const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
@@ -62,4 +65,28 @@ export function fetchFavorites() {
 		type: FETCH_FAVORITES,
 		payload: valuesParsed
 	}
+}
+
+export function requestFetchMovies() {
+  return {
+    type: REQUEST_FETCH_MOVIES,
+    payload: true
+  }
+}
+
+export function fetchMoviesThunk(movie) {
+  return dispatch => {
+    dispatch(requestFetchMovies())
+
+    return axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)
+      .then((data) => dispatch(fetchMoviesSuccess(data)))
+
+  }
+}
+
+export function fetchMoviesSuccess(data) {
+  return {
+    type: FETCH_MOVIES_SUCCESS,
+    payload: data
+  }
 }

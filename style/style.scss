@@ -1,9 +1,11 @@
+$mustard-yellow: #f5da55;
+
 body {
   font-family: 'Lato', sans-serif;
 
 }
 .navbar {
-  background-color: #f5da55;
+  background-color: $mustard-yellow;
   border-bottom: 3px solid black;
   margin-bottom: 0;
   border-radius: 0;
@@ -28,4 +30,13 @@ ul {
     margin: 40px 0;
     font-weight: bolder;
   }
+}
+
+.list-group-item {
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $mustard-yellow;
+
+  }
+
 }
