@@ -10,9 +10,38 @@ export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
+export const REQUEST_FETCH_UPCOMING_MOVIES = 'REQUEST_FETCH_UPCOMING_MOVIES';
+export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
+
 const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
 
+const TMDB_URL = 'https://api.themoviedb.org';
+const TMDB_API_KEY = 'c9f885213cf6ff2087da9d18287a8f78';
+
+export function fetchUpcomingMovies() {
+  return dispatch => {
+    dispatch(requestFetchUpcomingMovies())
+
+    return axios.get(`${TMDB_URL}/3/movie/upcoming?api_key=${TMDB_API_KEY}`)
+          .then((data) => dispatch(fetchUpcomingMoviesSuccess(data)))
+
+  }
+}
+
+export function requestFetchUpcomingMovies() {
+  return {
+    type: REQUEST_FETCH_UPCOMING_MOVIES,
+    payload: true
+  }
+}
+
+export function fetchUpcomingMoviesSuccess(data) {
+  return {
+    type: FETCH_UPCOMING_MOVIES_SUCCESS,
+    payload: data
+  }
+}
 
 export function fetchMovies(movie, callback) {
   const request = axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)

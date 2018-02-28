@@ -27,14 +27,14 @@ ReactDOM.render(
 
 
         <Switch>
-
+          
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/search-results' component={MovieList} />
           <Route path='/movie/:id' component={MovieShow} />
           <Route path='/' component={Home} />
 
         </Switch>
-        
+
       </div>
     </BrowserRouter>
   </Provider>
