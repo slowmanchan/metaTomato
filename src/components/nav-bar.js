@@ -3,7 +3,6 @@ import { Navbar, NavDropdown, MenuItem, Nav, NavItem, FormGroup, FormControl, Fo
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchBar from './search-bar';
 
-
 class TopNavbar extends Component {
 
   render() {
@@ -23,9 +22,16 @@ class TopNavbar extends Component {
               Favorites
             </NavItem>
           </LinkContainer>
-          <NavItem eventKey={2} href="#">
-            Link
-          </NavItem>
+          <LinkContainer to='/sign-up'>
+            <NavItem eventKey={2} href="#">
+              Sign Up
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to='/login'>
+            <NavItem>
+              Log In
+            </NavItem>
+          </LinkContainer>
           <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
             <MenuItem eventKey={3.1}>Action</MenuItem>
             <MenuItem eventKey={3.2}>Another action</MenuItem>

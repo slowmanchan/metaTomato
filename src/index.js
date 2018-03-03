@@ -14,6 +14,7 @@ import reducers from './reducers';
 import Navbar from './components/nav-bar';
 import Home from './components/home';
 import SignUpPage from './components/sign-up-page';
+import LoginPage from './components/login-page';
 
 require('../style/style.scss')
 require('../style/bootstrap.scss')
@@ -28,11 +29,12 @@ ReactDOM.render(
 
 
         <Switch>
-
+          <Route path='/login' component={LoginPage} />
+          <Route path='/sign-up' component={SignUpPage} />
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/search-results' component={MovieList} />
           <Route path='/movie/:id' component={MovieShow} />
-          <Route path='/' component={SignUpPage} />
+          <Route path='/' component={Home} />
 
         </Switch>
 

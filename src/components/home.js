@@ -13,9 +13,6 @@ class Home extends Component {
       return <div></div>
     }
 
-    const request = axios.get('/users')
-    .then(data => {return (<div>{data}</div>)})
-    console.log(request)
     return (
       <div></div>
 
