@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavDropdown, MenuItem, Nav, NavItem, FormGroup, FormControl, Form, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchBar from './search-bar';
+import Auth from '../modules/Auth';
 
 class TopNavbar extends Component {
 
@@ -27,11 +28,17 @@ class TopNavbar extends Component {
               Sign Up
             </NavItem>
           </LinkContainer>
-          <LinkContainer to='/login'>
-            <NavItem>
-              Log In
-            </NavItem>
-          </LinkContainer>
+          {
+            Auth.isUserAuthenticated() ?
+              ( <LinkContainer to='/'>
+                <NavItem onClick={() => Auth.deauthenticateUser()}>Logout</NavItem>
+              </LinkContainer>
+              ):( <LinkContainer to='/login'>
+                <NavItem>
+                  Log In
+                </NavItem>
+              </LinkContainer>
+              )}
           <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
             <MenuItem eventKey={3.1}>Action</MenuItem>
             <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -39,6 +46,9 @@ class TopNavbar extends Component {
             <MenuItem divider />
             <MenuItem eventKey={3.4}>Separated link</MenuItem>
           </NavDropdown>
+          <NavItem>
+            {Auth.isUserAuthenticated() ? `Good Day: ${localStorage.getItem('name')}` : 'Hello'}
+          </NavItem>
         </Nav>
         <Navbar.Collapse>
           <Navbar.Form pullRight>
