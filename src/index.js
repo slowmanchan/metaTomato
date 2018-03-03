@@ -13,6 +13,7 @@ import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
 import Navbar from './components/nav-bar';
 import Home from './components/home';
+import SignUpPage from './components/sign-up-page';
 
 require('../style/style.scss')
 require('../style/bootstrap.scss')
@@ -27,11 +28,11 @@ ReactDOM.render(
 
 
         <Switch>
-          
+
           <Route path='/favorites' component={FavoritesList} />
           <Route path='/search-results' component={MovieList} />
           <Route path='/movie/:id' component={MovieShow} />
-          <Route path='/' component={Home} />
+          <Route path='/' component={SignUpPage} />
 
         </Switch>
 
