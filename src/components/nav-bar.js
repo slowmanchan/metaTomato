@@ -3,6 +3,7 @@ import { Navbar, NavDropdown, MenuItem, Nav, NavItem, FormGroup, FormControl, Fo
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchBar from './search-bar';
 import Auth from '../modules/Auth';
+import uniqid from 'uniqid';
 
 class TopNavbar extends Component {
 
@@ -23,22 +24,25 @@ class TopNavbar extends Component {
               Favorites
             </NavItem>
           </LinkContainer>
-          <LinkContainer to='/sign-up'>
-            <NavItem eventKey={2} href="#">
-              Sign Up
-            </NavItem>
-          </LinkContainer>
+
           {
             Auth.isUserAuthenticated() ?
               ( <LinkContainer to='/'>
                 <NavItem onClick={() => Auth.deauthenticateUser()}>Logout</NavItem>
               </LinkContainer>
-              ):( <LinkContainer to='/login'>
-                <NavItem>
-                  Log In
-                </NavItem>
-              </LinkContainer>
-              )}
+              ):([
+                <LinkContainer key={uniqid()} to='/login'>
+                  <NavItem>
+                    Log In
+                  </NavItem>
+                </LinkContainer>,
+                <LinkContainer key={uniqid()} to='/sign-up'>
+                  <NavItem eventKey={2} href="#">
+                    Sign Up
+                  </NavItem>
+                </LinkContainer>
+
+              ])}
           <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
             <MenuItem eventKey={3.1}>Action</MenuItem>
             <MenuItem eventKey={3.2}>Another action</MenuItem>

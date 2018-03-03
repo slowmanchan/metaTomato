@@ -37,6 +37,7 @@ class SignUpPage extends Component {
     })
     .then((res) => {
       localStorage.setItem('successMessage', res.message)
+      this.props.history.push('/login')
     })
     .catch((errors) => {
       this.setState({

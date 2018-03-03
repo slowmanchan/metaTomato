@@ -54,6 +54,7 @@
     "sass-loader": "^6.0.5",
     "script-loader": "^0.7.0",
     "style-loader": "^0.17.0",
-    "svg-inline-loader": "^0.8.0"
+    "svg-inline-loader": "^0.8.0",
+    "uniqid": "^4.1.1"
   }
 }
