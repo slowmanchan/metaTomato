@@ -19,7 +19,7 @@ export default function(state = {
   	  const favorites = []
   	  return { ...state, favoritesList: favorites.push(action.payload)}
   	case DELETE_FAVORITE:
-  	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav.Title === action.payload.Title})}
+  	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav._id === action.payload})}
   	case FETCH_FAVORITES:
     console.log(action.payload.data)
   	  return { ...state, favorites: action.payload.data }

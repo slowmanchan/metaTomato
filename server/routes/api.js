@@ -39,4 +39,17 @@ router.post('/favorites', function(req, res, next) {
   })
 })
 
+router.delete('/favorites', function(req, res, next) {
+  var user = res.locals.user
+
+  Favorite.findById(req.body.id, function(err, favorite) {
+    if (err) { return next(err) }
+    user.favorites.remove(favorite._id)
+    user.save(function(err) {
+        favorite.remove();
+        res.json({"success": "Deleted successfully"})
+    });
+  })
+})
+
 module.exports = router;

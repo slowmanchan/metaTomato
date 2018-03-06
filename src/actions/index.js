@@ -78,12 +78,24 @@ export function addFavorite(movie) {
 	}
 }
 
-export function deleteFavorite(favorite) {
-	window.localStorage.removeItem(favorite.Title);
+export function deleteFavorite(id) {
+  console.log(id)
+  const url = '/api/favorites';
+  const data = {id};
+  const headers =  {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Authorization': `bearer ${Auth.getToken()}`
+  }
 
+  const request = axios({
+    method: 'delete',
+    url,
+    data,
+    headers
+  })
 	return {
 		type: DELETE_FAVORITE,
-		payload: favorite
+		payload: id
 	}
 }
 

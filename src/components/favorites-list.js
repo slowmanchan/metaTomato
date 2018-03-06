@@ -34,7 +34,7 @@ class FavoritesList extends Component {
 						<div >
 							<h4 className='card-title'>{favorite.title}</h4>
 							<button
-								onClick={() => this.props.deleteFavorite(favorite)}
+								onClick={() => this.props.deleteFavorite(favorite._id)}
 								className='btn btn-primary btn-danger'
 							>
 								Delete
