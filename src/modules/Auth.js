@@ -4,8 +4,10 @@ class Auth {
  *
  * @param {string} token
  */
-  static authenticateUser(token) {
+  static authenticateUser(token, email, name) {
     localStorage.setItem('token', token);
+    localStorage.setItem('name', name);
+    localStorage.setItem('email', email)
   }
 
   static isUserAuthenticated() {
@@ -15,6 +17,7 @@ class Auth {
   static deauthenticateUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
+    localStorage.removeItem('email');
   }
 
   static getToken() {

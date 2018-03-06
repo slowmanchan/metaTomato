@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import Auth from '../modules/Auth';
 
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIE = 'FETCH_MOVIE';
@@ -61,11 +62,18 @@ export function fetchMovie(id) {
 }
 
 export function addFavorite(movie) {
-	window.localStorage.setItem(movie.Title, JSON.stringify(movie))
+  const url = '/favorites';
+  const data = { 'title': movie.Title, 'poster': movie.Poster }
+  const headers = { headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Authorization': `bearer ${Auth.getToken()}`
+  }}
+
+  const request = axios.post(url, data, headers)
 
 	return {
 		type: ADD_FAVORITE,
-		payload: movie
+		payload: request
 	}
 }
 

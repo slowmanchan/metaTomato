@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUpcomingMovies } from '../actions';
-import { Carousel, Item, Caption } from 'react-bootstrap'
+import { Carousel, Item, Caption } from 'react-bootstrap';
 import axios from 'axios';
+import Auth from '../modules/Auth';
 
 class Home extends Component {
   componentDidMount() {
@@ -14,7 +15,22 @@ class Home extends Component {
     }
 
     return (
-      <div></div>
+      <div>
+
+        <button
+          onClick={(e) => {
+            e.preventDefault;
+            axios.post('/favorites',
+              {'title': 'test', 'poster': 'posted'},
+              {headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': `bearer ${Auth.getToken()}`
+              }})
+            .then((res) => {
+              console.log(res.data)
+            })
+          }}type='submit'>go</button>
+      </div>
 
     )
   }

@@ -1,6 +1,10 @@
 var express = require('express');
 var path = require('path');
 const config = require('./config');
+// connect to the db and load models
+require('./models').connect(config.dbUri);
+
+
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -9,8 +13,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
-// connect to the db and load models
-require('./models').connect(config.dbUri);
+const favoriteRoutes = require('./routes/favorites');
 
 const app = express();
 
@@ -41,7 +44,7 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 app.use('/api', authCheckMiddleware);
-
+app.use('/favorites', authCheckMiddleware);
 //routes
 app.use('/', index);
 app.use('/users', users);
@@ -49,6 +52,7 @@ app.use('/users', users);
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/favorites', favoriteRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

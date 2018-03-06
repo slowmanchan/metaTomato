@@ -50,6 +50,7 @@ module.exports = new PassportLocalStrategy({
       // default algorithm (HS256) used when none specified
       const token = jwt.sign(payload, config.jwtSecret);
       const data = {
+        email: user.email,
         name: user.name
       }
 

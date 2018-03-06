@@ -42,6 +42,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+
 	const validationResult = authHelper.validateLoginForm(req.body);
 	if (!validationResult.success) {
 		return res.status(400).json({

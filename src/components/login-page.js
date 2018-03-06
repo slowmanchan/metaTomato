@@ -25,12 +25,9 @@ class LoginPage extends Component {
       password: this.state.user.password
     })
     .then((res) => {
-      localStorage.setItem('name', res.data.user.name)
-      console.log(this.state);
-      Auth.authenticateUser(res.data.token);
+      console.log(res)
+      Auth.authenticateUser(res.data.token, res.data.user.email, res.data.user.name);
       this.props.history.push('/');
-
-
     })
     .catch((errors) => {
       this.setState({
