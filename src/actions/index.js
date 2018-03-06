@@ -62,7 +62,7 @@ export function fetchMovie(id) {
 }
 
 export function addFavorite(movie) {
-  const url = '/favorites';
+  const url = '/api/favorites';
   const data = { 'title': movie.Title, 'poster': movie.Poster }
   const headers = { headers: {
     'Content-Type': 'application/json;charset=UTF-8',
@@ -70,6 +70,7 @@ export function addFavorite(movie) {
   }}
 
   const request = axios.post(url, data, headers)
+    .catch((err) => { console.log('Not authorized')})
 
 	return {
 		type: ADD_FAVORITE,
@@ -87,20 +88,19 @@ export function deleteFavorite(favorite) {
 }
 
 export function fetchFavorites() {
-	var values = _.values(localStorage);
-	var valuesParsed = values.filter((value) => {
-     try {
-         JSON.parse(value);
-     } catch (e) {
-         return false
-     }
-     return true
-	})
-  .map((value) => JSON.parse(value))
+  const url = '/api/favorites';
+  const headers = { headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Authorization': `bearer ${Auth.getToken()}`
+  }}
+
+  const request = axios.get(url, headers)
+    .then((req) => { return req })
+    .catch((err) => { console.log(err.response)})
 
 	return {
 		type: FETCH_FAVORITES,
-		payload: valuesParsed
+		payload: request
 	}
 }
 

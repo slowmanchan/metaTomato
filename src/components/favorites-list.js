@@ -4,14 +4,16 @@ import _ from 'lodash';
 import { connect } from 'react-redux'
 import { deleteFavorite, fetchFavorites } from '../actions';
 import { Button, ButtonGroup } from 'reactstrap';
+import uniqid from 'uniqid';
+import {  ListGroup, ListGroupItem, Media} from 'reactstrap';
 
 class FavoritesList extends Component {
+
 	componentDidMount() {
 		this.props.fetchFavorites()
 	}
 
 	render() {
-    console.log(this.props)
 
 	  const { favorites } = this.props
 
@@ -19,16 +21,18 @@ class FavoritesList extends Component {
 			return <div>Loading...</div>
 		}
 
-	  const favoritesList = favorites.map((favorite, idx) => {
+	  const favoritesList = favorites.map((favorite) => {
 			return (
 
-					<div>
+					<span
+						style={{ display: 'inline-block'}}
+						key={uniqid()}>
 						<img
-							className='card-img-top img-fluid'
-							src={favorite.Poster}
+							style={{ width: '200px'}}
+							src={favorite.poster}
 						/>
-						<div className='card-block'>
-							<h4 className='card-title'>{favorite.Title}</h4>
+						<div >
+							<h4 className='card-title'>{favorite.title}</h4>
 							<button
 								onClick={() => this.props.deleteFavorite(favorite)}
 								className='btn btn-primary btn-danger'
@@ -36,7 +40,7 @@ class FavoritesList extends Component {
 								Delete
 							</button>
 						</div>
-					</div>
+					</span>
 
 			)
 

@@ -43,7 +43,7 @@ module.exports = {
     contentBase: './',
     proxy: {
       "/auth": { target: 'http://localhost:3000', secure: false},
-      "/favorites": { target: 'http://localhost:3000', secure: false}
+      "/api": { target: 'http://localhost:3000', secure: false}
     }
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map',

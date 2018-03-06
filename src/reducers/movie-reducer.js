@@ -21,7 +21,8 @@ export default function(state = {
   	case DELETE_FAVORITE:
   	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav.Title === action.payload.Title})}
   	case FETCH_FAVORITES:
-  	  return { ...state, favorites: action.payload }
+    console.log(action.payload.data)
+  	  return { ...state, favorites: action.payload.data }
     case REQUEST_FETCH_MOVIES:
       return { ...state, isLoading: action.payload}
     case FETCH_MOVIES_SUCCESS:
