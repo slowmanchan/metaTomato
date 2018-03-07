@@ -93,6 +93,7 @@ export function deleteFavorite(id) {
     data,
     headers
   })
+
 	return {
 		type: DELETE_FAVORITE,
 		payload: id
