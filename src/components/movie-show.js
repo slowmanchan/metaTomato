@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { fetchMovie} from '../actions';
 import { Link } from 'react-router-dom';
 import AddFavorite from './add-favorite';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap'
+import { Row, Col, Progress } from 'antd';
+
+import 'antd/dist/antd.css'
 
 class MovieShow extends Component {
 	componentDidMount() {
@@ -25,43 +27,54 @@ class MovieShow extends Component {
 		    <div key={index}>{rating.Source} - {rating.Value}</div>
 		  )
 		})
+
+		const formattedRatings = Ratings.map((rating) => {
+			if (rating.Value.length <= 3 || rating.Value === '100%') {
+				return +rating.Value.replace('%', '')
+			} else if (rating.Value.split('/')[1] === '100') {
+				return +rating.Value.split('/')[0]
+			} else if (rating.Value.split('/')[1] === '10') {
+				return rating.Value.split('/')[0] * 10
+			}
+
+		})
+		console.log(formattedRatings)
 		return (
 
-	      <div className='container'>
-		      <div className='row'>
-						<Link to={'/search-results'}>
-							Back
-						</Link>
+					<div style={{margin: '40px'}}>
+						<Row>
+							<Col xs={24} md={8}>
+								<img style={{width: '300px'}} src={movie.Poster}/>
+							</Col>
+							<Col xs={24} md={16}>
+								<h1 style={{fontWeight: '900'}}>{movie.Title}&nbsp;<span style={{ fontSize: 'small', fontWeight: 'normal', color: 'grey'}}>({movie.Year})</span></h1>
+								<div style={{margin: '40px 0'}}>
+
+									<Progress
+										type="circle"
+										percent={formattedRatings[1]}
+										width={80}
+									/>
+									<div style={{fontStyle: 'italic',margin: '10px',width: '60px', display: 'inline-block'}}>
+										Rotten Tomatoes
+									</div>
+									<Progress type="circle" percent={formattedRatings[2]} width={80}/>
+									<div style={{fontStyle: 'italic',margin: '10px',display: 'inline-block'}}>
+										MetaCritic
+									</div>
+									<Progress type="circle" percent={formattedRatings[0]} width={80}/>
+									<div style={{fontStyle: 'italic',margin: '10px',display: 'inline-block'}}>
+										IMdb
+									</div>
+								</div>
+								<h3>Overview</h3>
+
+								<p>{movie.Plot}</p>
+							</Col>
+						</Row>
 					</div>
-					<div className='row'>
 
-						<div className='col-xs-8'>
-
-							<h1>{movie.Title}</h1>
-
-							<p>{movie.Released}</p>
-
-
-							<h3>Plot</h3>
-							<p>{movie.Plot}</p>
-							<h3>Ratings</h3>
-							{ratingList}
-							<h3>Box office</h3>
-							<p>{movie.BoxOffice}</p>
-
-						</div>
-						<div className='col-xs-4'>
-							<img
-								style={{width: '300px'}}
-								src={movie.Poster} />
-						</div>
-						<AddFavorite
-							movie={this.props.movie}
-						/>
-					</div>
-				</div>
-
-		)
+				)
 	}
 }
 

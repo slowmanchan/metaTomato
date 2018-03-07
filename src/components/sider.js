@@ -23,7 +23,9 @@ class SiderNav extends React.Component {
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
         >
-          <div className="logo" style={{ padding: '20px', color: 'white', fontWeight: 'bolder'}}>metaTomato</div>
+          <div className="logo" style={{ textAlign: 'center', padding: '20px', color: 'white', fontWeight: 'bolder'}}>
+            {this.state.collapsed ? 'M' : 'metaTomato'}
+          </div>
 
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">

@@ -32,7 +32,7 @@ class MovieList extends Component {
 
     const movies = moviesList.map((movie, idx) => {
     return (
-    <Col xs={24} sm={12} md={8} lg={4}>
+    <Col key={uniqid()} xs={24} sm={12} md={8} lg={4}>
       <Link to={`/movie/${movie.imdbID}`}>
         <Card
           style={{width: '170px', margin: '20px 10px'}}
