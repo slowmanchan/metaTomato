@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies, fetchMoviesThunk } from '../actions'
-import { LinkContainer, InputGroup, Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
+import { Input } from 'antd';
+const Search = Input.Search;
 
 class SearchBar extends Component {
   constructor(props) {
@@ -20,34 +21,24 @@ class SearchBar extends Component {
 
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
+  handleSubmit() {
     this.props.fetchMoviesThunk(this.state.value)
     .then(() => this.props.history.push('/search-results'))
   }
 
   render() {
-
+    console.log(this.state.value)
     return (
-      <FormGroup>
 
-        <FormControl
-          type="text"
-          placeholder="Search for a movie...."
-          value={this.state.value}
-          onChange={this.handleInputChange}
-        />{' '}
-
-        <Button
-
-          type="submit"
-          onClick={this.handleSubmit}
-          title='action'
-        >
-          go
-        </Button>
-
-      </FormGroup>
+       <Search
+         type="text"
+         placeholder="Search for a movie...."
+         value={this.state.value}
+         onChange={this.handleInputChange}
+         enterButton="Search"
+         size="large"
+         onSearch={this.handleSubmit}
+       />
     )
   }
 }

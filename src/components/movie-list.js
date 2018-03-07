@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, fetchMoviesThunk } from '../actions';
 import { Link } from 'react-router-dom';
-import SearchBar from '../components/search-bar';
-import {  ListGroup, ListGroupItem, Media} from 'reactstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import Spinner from './spinner';
-import svg from '../icons/doublering.svg';
-import cube from '../icons/cube.gif';
+import { Card, Row, Col } from 'antd';
+import uniqid from 'uniqid';
+const { Meta } = Card;
+
+
+const gridStyle = {
+  width: '20%',
+  textAlign: 'center',
+  border: 'none',
+  boxShadow: 'none'
+};
+
 
 class MovieList extends Component {
   componentDidMount() {
@@ -26,45 +32,26 @@ class MovieList extends Component {
 
     const movies = moviesList.map((movie, idx) => {
     return (
-      <ListGroupItem key={idx}>
-        <LinkContainer to={`/movie/${movie.imdbID}`}>
+    <Col xs={24} sm={12} md={8} lg={4}>
+      <Link to={`/movie/${movie.imdbID}`}>
+        <Card
+          style={{width: '170px', margin: '20px 10px'}}
+          hoverable
+          cover={<img style={{height: '250px'}} alt="example" src={movie.Poster} />}>
+          <Meta
+            title={movie.Title}
+          />
+        </Card>
+      </Link>
 
-          <Media>
-            <Media left>
-              <Media object
-                src={movie.Poster}
-                style={{width: '100px'}}
-                id={movie.imdbID}
-
-              />
-            </Media>
-            <Media body>
-              <Media heading>
-                {movie.Title}
-              </Media>
-              <ul>
-                <li>  Type: {movie.Type}</li>
-                <li>Year: {movie.Year} </li>
-                <li>  imdbID: {movie.imdbID}</li>
-                <li>Poster Link: {movie.Poster}</li>
-              </ul>
-
-            </Media>
-
-          </Media>
-
-        </LinkContainer>
-
-      </ListGroupItem>
-
+    </Col>
       )
     })
 
     return (
-       <div className='container'>
-         <h3>Search Results</h3>
-         {this.props.isLoading ? <div className='text-center'><img src={cube} /></div> :  <ListGroup>{movies}</ListGroup>}
-         </div>
+       <div>
+         {this.props.isLoading ? <div className='text-center'><img src={cube} /></div> :  <Row>{movies}</Row>}
+       </div>
     )
  }
 }

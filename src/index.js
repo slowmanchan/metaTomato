@@ -11,7 +11,8 @@ import MovieList from './components/movie-list';
 import MovieShow from './components/movie-show';
 import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
-import Navbar from './components/nav-bar';
+
+import SiderNav from './components/sider';
 import Home from './components/home';
 import SignUpPage from './components/sign-up-page';
 import LoginPage from './components/login-page';
@@ -25,18 +26,19 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
-        <Navbar/>
 
+        <SiderNav>
 
-        <Switch>
-          <Route path='/login' component={LoginPage} />
-          <Route path='/sign-up' component={SignUpPage} />
-          <Route path='/favorites' component={FavoritesList} />
-          <Route path='/search-results' component={MovieList} />
-          <Route path='/movie/:id' component={MovieShow} />
-          <Route path='/' component={Home} />
+          <Switch>
+            <Route path='/login' component={LoginPage} />
+            <Route path='/sign-up' component={SignUpPage} />
+            <Route path='/favorites' component={FavoritesList} />
+            <Route path='/search-results' component={MovieList} />
+            <Route path='/movie/:id' component={MovieShow} />
+            <Route path='/' component={Home} />
 
-        </Switch>
+          </Switch>
+        </SiderNav>
 
       </div>
     </BrowserRouter>
