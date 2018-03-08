@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMovie} from '../actions';
+import { fetchMovieThunk } from '../actions';
 import { Link } from 'react-router-dom';
 import AddFavorite from './add-favorite';
-import { Row, Col, Progress, Button, Tag, Tabs, Icon, Divider } from 'antd';
+import { Row, Col, Progress, Button, Tag, Tabs, Icon, Divider, Spin } from 'antd';
 import { formatRatings } from '../helpers/formatRatings.js';
 import uniqid from 'uniqid';
 import 'antd/dist/antd.css';
@@ -15,20 +15,17 @@ class MovieShow extends Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchMovie(this.props.match.params.id)
+		this.props.fetchMovieThunk(this.props.match.params.id)
 	}
 	render() {
-		const circleColors = {
-		  red: 'red',
-		  yellow: 'yellow',
-		  green: 'green'
-		}
-		
-		const { movie } = this.props
 
-		if (!movie) {
+		const { movie } = this.props
+        console.log(this.props.isLoading)
+		if (!movie || this.props.isLoading) {
 			return (
-			  <div>Loading...</div>
+			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
+			    <Spin tip='Gimme a sec....' size='large' />
+			  </div>
 			)
 		}
 
@@ -39,7 +36,6 @@ class MovieShow extends Component {
 		  return (
 		    <div key={uniqid()} style={{ display: 'inline-block'}}>
 			  <Progress
-			    strokeColor='red'
 				type="circle"
 				percent={formatRating.rating}
 				width={80}
@@ -127,8 +123,9 @@ class MovieShow extends Component {
 
 function mapStateToProps(state) {
 	return {
-	  movie: state.movies.selectedMovie
+	  movie: state.movies.selectedMovie,
+	  isLoading: state.movies.isLoading
 	}
 }
 
-export default connect(mapStateToProps, { fetchMovie })(MovieShow)
+export default connect(mapStateToProps, { fetchMovieThunk })(MovieShow)

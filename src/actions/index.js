@@ -7,7 +7,10 @@ export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
+export const REQUEST_FETCH_MOVIE = 'REQUEST_FETCH_MOVIE';
 export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES';
+
+export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
@@ -139,4 +142,26 @@ export function fetchMoviesSuccess(data) {
     type: FETCH_MOVIES_SUCCESS,
     payload: data
   }
+}
+
+export function requestFetchMovie() {
+	return {
+		type: REQUEST_FETCH_MOVIE,
+		payload: true
+	}
+}
+
+export function fetchMovieSuccess(data) {
+	return {
+		type: FETCH_MOVIE_SUCCESS,
+		payload: data
+	}
+}
+export function fetchMovieThunk(id) {
+	return dispatch => {
+		dispatch(requestFetchMovie())
+		
+		return axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
+		  .then((data) => dispatch(fetchMovieSuccess(data)))
+	}
 }
