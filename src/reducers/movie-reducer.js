@@ -18,7 +18,6 @@ export default function(state = {
   	case DELETE_FAVORITE:
   	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav._id === action.payload})}
   	case FETCH_FAVORITES:
-    console.log(action.payload.data)
   	  return { ...state, favorites: action.payload.data }
     case REQUEST_FETCH_MOVIES:
       return { ...state, isLoading: true}
@@ -27,12 +26,10 @@ export default function(state = {
     case REQUEST_FETCH_UPCOMING_MOVIES:
       return { ...state, isLoading: true }
     case FETCH_UPCOMING_MOVIES_SUCCESS:
-      console.log(action.payload.data.results)
       return { ...state, upComingMoviesList: action.payload.data.results, isLoading: false }
 	case REQUEST_FETCH_MOVIE:
 	  return { ...state, isLoading: true }
 	case FETCH_MOVIE_SUCCESS:
-	console.log( state )
 	  return { ...state, selectedMovie: action.payload.data, isLoading: false }
     default:
         return state;

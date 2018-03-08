@@ -1,4 +1,4 @@
-import { Layout, Menu, Breadcrumb, Icon, Input } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Input, Button, Avatar } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const Search = Input.Search;
@@ -53,15 +53,18 @@ class SiderNav extends React.Component {
               <Menu.Item key="6">Team 1</Menu.Item>
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu>
-            <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
+      
           </Menu>
         </Sider>
         <Layout>
           <Header style={{ background: '#fff' }} >
-            <SearchBar/>
+			<div style={{ display: 'inline-block', width: '40%'}}>
+				<SearchBar/>
+			</div>
+			<div style={{ display: 'inline-block', width: '60%', textAlign: 'right' }}>
+				<Button type='primary' ghost>Login</Button>{' '}<Button type='primary'>Sign Up</Button>
+				<Avatar icon='user' size='large' />{' Username'}
+			</div>
           </Header>
           <Content>
             {this.props.children}
