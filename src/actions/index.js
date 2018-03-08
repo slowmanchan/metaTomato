@@ -2,8 +2,6 @@ import axios from 'axios';
 import _ from 'lodash';
 import Auth from '../modules/Auth';
 
-export const FETCH_MOVIES = 'FETCH_MOVIES';
-export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
@@ -45,23 +43,6 @@ export function fetchUpcomingMoviesSuccess(data) {
     type: FETCH_UPCOMING_MOVIES_SUCCESS,
     payload: data
   }
-}
-
-export function fetchMovies(movie, callback) {
-  const request = axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)
-
-  return {
-    type: FETCH_MOVIES,
-    payload: request
-  }
-}
-
-export function fetchMovie(id) {
-	const request = axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
-	return {
-		type: FETCH_MOVIE,
-		payload: request
-	}
 }
 
 export function addFavorite(movie) {
@@ -122,8 +103,7 @@ export function fetchFavorites() {
 
 export function requestFetchMovies() {
   return {
-    type: REQUEST_FETCH_MOVIES,
-    payload: true
+    type: REQUEST_FETCH_MOVIES
   }
 }
 
@@ -146,8 +126,7 @@ export function fetchMoviesSuccess(data) {
 
 export function requestFetchMovie() {
 	return {
-		type: REQUEST_FETCH_MOVIE,
-		payload: true
+		type: REQUEST_FETCH_MOVIE
 	}
 }
 

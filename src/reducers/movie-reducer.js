@@ -1,5 +1,5 @@
 import {
-  FETCH_MOVIES, FETCH_MOVIE, ADD_FAVORITE, DELETE_FAVORITE,
+  ADD_FAVORITE, DELETE_FAVORITE,
   FETCH_FAVORITES, REQUEST_FETCH_MOVIES, FETCH_MOVIES_SUCCESS,
   REQUEST_FETCH_UPCOMING_MOVIES, FETCH_UPCOMING_MOVIES_SUCCESS,
   FETCH_MOVIE_SUCCESS, REQUEST_FETCH_MOVIE
@@ -12,10 +12,6 @@ export default function(state = {
   isLoading: false
 }, action) {
   switch(action.type) {
-    case FETCH_MOVIES:
-      return { ...state, moviesList: action.payload.data.Search}
-  	case FETCH_MOVIE:
-  	  return { ...state, selectedMovie: action.payload.data };
   	case ADD_FAVORITE:
   	  const favorites = []
   	  return { ...state, favoritesList: favorites.push(action.payload)}
@@ -25,16 +21,16 @@ export default function(state = {
     console.log(action.payload.data)
   	  return { ...state, favorites: action.payload.data }
     case REQUEST_FETCH_MOVIES:
-      return { ...state, isLoading: action.payload}
+      return { ...state, isLoading: true}
     case FETCH_MOVIES_SUCCESS:
       return { ...state, moviesList: action.payload.data.Search, isLoading: false }
     case REQUEST_FETCH_UPCOMING_MOVIES:
-      return { ...state, isLoading: action.payload }
+      return { ...state, isLoading: true }
     case FETCH_UPCOMING_MOVIES_SUCCESS:
       console.log(action.payload.data.results)
       return { ...state, upComingMoviesList: action.payload.data.results, isLoading: false }
 	case REQUEST_FETCH_MOVIE:
-	  return { ...state, isLoading: action.payload }
+	  return { ...state, isLoading: true }
 	case FETCH_MOVIE_SUCCESS:
 	console.log( state )
 	  return { ...state, selectedMovie: action.payload.data, isLoading: false }

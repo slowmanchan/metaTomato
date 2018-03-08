@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, fetchMoviesThunk } from '../actions';
 import { Link } from 'react-router-dom';
-import { Card, Row, Col } from 'antd';
+import { Card, Row, Col, Spin } from 'antd';
 import uniqid from 'uniqid';
 const { Meta } = Card;
 
@@ -15,11 +15,13 @@ class MovieList extends Component {
   render() {
     console.log(this.props)
   	const { moviesList } = this.props
-  	if (!moviesList) {
-  		return (
-  	    <div></div>
-  		)
-  	}
+  	if (!moviesList || this.props.isLoading) {
+			return (
+			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
+			    <Spin tip='Gimme a sec....' size='large' />
+			  </div>
+		)
+	}
 
     const movies = moviesList.map((movie, idx) => {
     return (
@@ -41,7 +43,7 @@ class MovieList extends Component {
 
     return (
        <div>
-         {this.props.isLoading ? <div className='text-center'><img src={cube} /></div> :  <Row>{movies}</Row>}
+         <Row>{movies}</Row>
        </div>
     )
  }
