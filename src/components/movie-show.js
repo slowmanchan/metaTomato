@@ -18,6 +18,12 @@ class MovieShow extends Component {
 		this.props.fetchMovie(this.props.match.params.id)
 	}
 	render() {
+		const circleColors = {
+		  red: 'red',
+		  yellow: 'yellow',
+		  green: 'green'
+		}
+		
 		const { movie } = this.props
 
 		if (!movie) {
@@ -26,47 +32,51 @@ class MovieShow extends Component {
 			)
 		}
 
-		const { Ratings, Genre } = movie
-    console.log(movie)
-		const formattedRatings = formatRatings(Ratings)
-    const genres = Genre.split(',').map((item) => {
-			return (
-				<Tag
-					color='geekblue'
-					key={uniqid()}
-				>
-					{item}
-				</Tag>
-			)
-		})
-		console.log(genres)
+		const { Ratings, Genre } = movie;
+	
+		const formattedRatings = formatRatings(Ratings).map((formatRating, idx) => {
+			console.log(formatRating)
+		  return (
+		    <div key={uniqid()} style={{ display: 'inline-block'}}>
+			  <Progress
+			    strokeColor='red'
+				type="circle"
+				percent={formatRating.rating}
+				width={80}
+				strokeWidth={10}
+			  />
+			  <div style={{fontStyle: 'italic',margin: '10px',width: '60px', display: 'inline-block'}}>
+			    {formatRating.name}
+			  </div>
+			</div>
+		  )
+		});
+	
+		
+		const genres = Genre.split(',').map((item) => {
+				return (
+					<Tag
+						color='geekblue'
+						key={uniqid()}
+					>
+						{item}
+					</Tag>
+				)
+			})
+        
 		return (
 
-					<div style={{margin: '40px'}}>
+					<div style={{ margin: '40px' }}>
 						<Row>
 							<Col xs={24} md={8}>
-								<img style={{width: '300px'}} src={movie.Poster}/>
+							  <div style={{ margin: '0 40px 40px 0'}}>
+								<img style={{maxWidth: '100%'}} src={movie.Poster}/>
+							  </div>
 							</Col>
 							<Col xs={24} md={16}>
 								<h1 style={{fontWeight: '900'}}>{movie.Title}&nbsp;<span style={{ fontSize: 'small', fontWeight: 'normal', color: 'grey'}}>({movie.Year})</span></h1>
 								<div style={{margin: '40px 0'}}>
-
-									<Progress
-										type="circle"
-										percent={formattedRatings[1]}
-										width={80}
-									/>
-									<div style={{fontStyle: 'italic',margin: '10px',width: '60px', display: 'inline-block'}}>
-										Rotten Tomatoes
-									</div>
-									<Progress type="circle" percent={formattedRatings[2]} width={80}/>
-									<div style={{fontStyle: 'italic',margin: '10px',display: 'inline-block'}}>
-										MetaCritic
-									</div>
-									<Progress type="circle" percent={formattedRatings[0]} width={80}/>
-									<div style={{fontStyle: 'italic',margin: '10px',display: 'inline-block'}}>
-										IMdb
-									</div>
+									{formattedRatings}
 								</div>
 								<div style={{marginBottom: '20px'}}>
 									<AddFavorite movie={movie}/>

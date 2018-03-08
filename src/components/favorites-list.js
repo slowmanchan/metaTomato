@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux'
 import { deleteFavorite, fetchFavorites } from '../actions';
-import { Button, ButtonGroup } from 'reactstrap';
 import uniqid from 'uniqid';
-import {  ListGroup, ListGroupItem, Media} from 'reactstrap';
+import { Card, Row, Col } from 'antd';
+const { Meta } = Card;
+
 
 class FavoritesList extends Component {
 
@@ -22,44 +23,25 @@ class FavoritesList extends Component {
 		}
 
 	  const favoritesList = favorites.map((favorite) => {
-			return (
-
-					<span
-						style={{ display: 'inline-block'}}
-						key={uniqid()}>
-						<img
-							style={{ width: '200px'}}
-							src={favorite.poster}
-						/>
-						<div >
-							<h4 className='card-title'>{favorite.title}</h4>
-							<button
-								onClick={() => this.props.deleteFavorite(favorite._id)}
-								className='btn btn-primary btn-danger'
-							>
-								Delete
-							</button>
-						</div>
-					</span>
-
+			return (				
+				<Col key={uniqid()} xs={24} sm={12} md={8} lg={4}>
+					<Card
+					  style={{width: '170px', margin: '20px 10px'}}
+					  hoverable
+					  cover={<img style={{height: '250px'}} alt="example" src={movie.Poster} />}>
+					  <Meta
+						title={movie.Title}
+					  />
+					</Card>
+				</Col>
 			)
 
 	})
 
-	return (
-	    <div >
-				<div className='banner'>
-					<div className='container'>
-						<h2>Favorites</h2>
-					</div>
-
-				</div>
+	return (  
 				<div>
 					{favoritesList}
 				</div>
-
-
-			</div>
 	  )
 	}
 }

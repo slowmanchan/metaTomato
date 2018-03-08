@@ -6,15 +6,6 @@ import { Card, Row, Col } from 'antd';
 import uniqid from 'uniqid';
 const { Meta } = Card;
 
-
-const gridStyle = {
-  width: '20%',
-  textAlign: 'center',
-  border: 'none',
-  boxShadow: 'none'
-};
-
-
 class MovieList extends Component {
   componentDidMount() {
     !this.props.moviesList ? this.props.fetchMoviesThunk('movie') : null;
