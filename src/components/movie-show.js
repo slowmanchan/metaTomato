@@ -3,11 +3,17 @@ import { connect } from 'react-redux';
 import { fetchMovie} from '../actions';
 import { Link } from 'react-router-dom';
 import AddFavorite from './add-favorite';
-import { Row, Col, Progress } from 'antd';
-
-import 'antd/dist/antd.css'
+import { Row, Col, Progress, Button, Tag, Tabs, Icon, Divider } from 'antd';
+import { formatRatings } from '../helpers/formatRatings.js';
+import uniqid from 'uniqid';
+import 'antd/dist/antd.css';
+const TabPane = Tabs.TabPane;
 
 class MovieShow extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	componentDidMount() {
 		this.props.fetchMovie(this.props.match.params.id)
 	}
@@ -20,25 +26,20 @@ class MovieShow extends Component {
 			)
 		}
 
-		const { Ratings } = movie
-		console.log(Ratings)
-		const ratingList = Ratings.map((rating, index) => {
-		  return (
-		    <div key={index}>{rating.Source} - {rating.Value}</div>
-		  )
+		const { Ratings, Genre } = movie
+    console.log(movie)
+		const formattedRatings = formatRatings(Ratings)
+    const genres = Genre.split(',').map((item) => {
+			return (
+				<Tag
+					color='geekblue'
+					key={uniqid()}
+				>
+					{item}
+				</Tag>
+			)
 		})
-
-		const formattedRatings = Ratings.map((rating) => {
-			if (rating.Value.length <= 3 || rating.Value === '100%') {
-				return +rating.Value.replace('%', '')
-			} else if (rating.Value.split('/')[1] === '100') {
-				return +rating.Value.split('/')[0]
-			} else if (rating.Value.split('/')[1] === '10') {
-				return rating.Value.split('/')[0] * 10
-			}
-
-		})
-		console.log(formattedRatings)
+		console.log(genres)
 		return (
 
 					<div style={{margin: '40px'}}>
@@ -67,9 +68,45 @@ class MovieShow extends Component {
 										IMdb
 									</div>
 								</div>
+								<div style={{marginBottom: '20px'}}>
+									<AddFavorite movie={movie}/>
+									{' '}
+									<Button>+ Watch List</Button>
+								</div>
 								<h3>Overview</h3>
 
 								<p>{movie.Plot}</p>
+								{genres}
+							</Col>
+						</Row>
+						<Divider/>
+						<Row>
+							<Col>
+								<Tabs defaultActiveKey="1">
+									<TabPane tab={<span><Icon type="person" />People</span>} key="1">
+										<h2>Actors</h2>
+										<p>{movie.Actors}</p>
+										<h2>Writers</h2>
+										<p>{movie.Writer}</p>
+										<h2>Director</h2>
+										<p>{movie.Director}</p>
+									</TabPane>
+									<TabPane tab={<span><Icon type="award" />Awards</span>} key="2">
+										<h2>Awards</h2>
+										<p>{movie.Awards}</p>
+										<h2>Box Office</h2>
+										<p>{movie.BoxOffice}</p>
+									</TabPane>
+									<TabPane tab={<span>Other</span>} key="3">
+										Tab 1
+									</TabPane>
+									<TabPane tab={<span><Icon type="apple" />Tab 1</span>} key="4">
+										Tab 1
+									</TabPane>
+									<TabPane tab={<span><Icon type="apple" />Tab 1</span>} key="5">
+										Tab 1
+									</TabPane>
+								</Tabs>
 							</Col>
 						</Row>
 					</div>

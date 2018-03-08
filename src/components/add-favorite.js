@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addFavorite } from '../actions';
+import { Button, Icon } from 'antd';
 
 class AddFavorite extends Component {
   render() {
     return(
-	  <button
+	  <Button
 	    onClick={() => this.props.addFavorite(this.props.movie)}
+      icon='heart'
    >
-      Add Fav
-	  </button>
+      Add Favorite
+	  </Button>
+    
 	)
   }
 }

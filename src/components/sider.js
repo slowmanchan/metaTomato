@@ -5,7 +5,8 @@ const Search = Input.Search;
 import SearchBar  from './search-bar';
 import SearchResults from './movie-list';
 import React from 'react';
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 
 class SiderNav extends React.Component {
   state = {
@@ -23,10 +24,11 @@ class SiderNav extends React.Component {
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
         >
-          <div className="logo" style={{ textAlign: 'center', padding: '20px', color: 'white', fontWeight: 'bolder'}}>
-            {this.state.collapsed ? 'M' : 'metaTomato'}
-          </div>
-
+          <Link to='/'>
+            <div className="logo" style={{ textAlign: 'center', padding: '20px', color: 'white', fontWeight: 'bolder'}}>
+              {this.state.collapsed ? 'M' : 'metaTomato'}
+            </div>
+          </Link>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
               <Icon type="heart-o" />
