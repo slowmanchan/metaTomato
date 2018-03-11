@@ -1,9 +1,10 @@
-import { Layout, Menu, Breadcrumb, Icon, Input, Button, Avatar } from 'antd';
+import { notification, Popover, Layout, Menu, Breadcrumb, Icon, Input, Button, Avatar } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const Search = Input.Search;
 import SearchBar  from './search-bar';
 import SearchResults from './movie-list';
+import LoginPage from './login-page';
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
@@ -11,11 +12,25 @@ import { Link } from 'react-router-dom';
 class SiderNav extends React.Component {
   state = {
     collapsed: false,
+    visible: false,
+    alert: false
   };
+
+  hide = () => {
+    this.setState({
+      visble: false,
+    });
+  }
+
+  handleVisibleChange = (visible) => {
+    this.setState({ visible });
+  }
+
   onCollapse = (collapsed) => {
     console.log(collapsed);
     this.setState({ collapsed });
   }
+
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -53,20 +68,40 @@ class SiderNav extends React.Component {
               <Menu.Item key="6">Team 1</Menu.Item>
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu>
-      
+
           </Menu>
         </Sider>
         <Layout>
           <Header style={{ background: '#fff' }} >
-			<div style={{ display: 'inline-block', width: '40%'}}>
-				<SearchBar/>
-			</div>
-			<div style={{ display: 'inline-block', width: '60%', textAlign: 'right' }}>
-				<Button type='primary' ghost>Login</Button>{' '}<Button type='primary'>Sign Up</Button>
-				<Avatar icon='user' size='large' />{' Username'}
-			</div>
+            <div style={{ display: 'inline-block', width: '40%'}}>
+              <SearchBar/>
+            </div>
+            <div style={{ display: 'inline-block', width: '60%', textAlign: 'right' }}>
+              <Popover
+                visible={this.state.visible}
+                content={<LoginPage alert={() => {
+                  {notification.success({
+                     message: 'Login Success',
+                  })}
+                  this.setState({
+                    visible: false
+                  })
+                }}/>}
+                title='Log In'
+                trigger='click'
+                visible={this.state.visible}
+                onVisibleChange={this.handleVisibleChange}
+              >
+                <Button type='primary' ghost>Login</Button>
+
+              </Popover>
+
+              <Button type='primary' ghost>Sign Up</Button>
+
+            </div>
           </Header>
           <Content>
+
             {this.props.children}
           </Content>
           <Footer style={{ textAlign: 'center' }}>

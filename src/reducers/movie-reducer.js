@@ -2,7 +2,7 @@ import {
   ADD_FAVORITE, DELETE_FAVORITE,
   FETCH_FAVORITES, REQUEST_FETCH_MOVIES, FETCH_MOVIES_SUCCESS,
   REQUEST_FETCH_UPCOMING_MOVIES, FETCH_UPCOMING_MOVIES_SUCCESS,
-  FETCH_MOVIE_SUCCESS, REQUEST_FETCH_MOVIE
+  FETCH_MOVIE_SUCCESS, REQUEST_FETCH_MOVIE, REQUEST_ADD_FAVORITE
 } from '../actions/index';
 import _ from 'lodash';
 
@@ -27,11 +27,13 @@ export default function(state = {
       return { ...state, isLoading: true }
     case FETCH_UPCOMING_MOVIES_SUCCESS:
       return { ...state, upComingMoviesList: action.payload.data.results, isLoading: false }
-	case REQUEST_FETCH_MOVIE:
-	  return { ...state, isLoading: true }
-	case FETCH_MOVIE_SUCCESS:
-	  return { ...state, selectedMovie: action.payload.data, isLoading: false }
+	  case REQUEST_FETCH_MOVIE:
+	    return { ...state, isLoading: true }
+    case REQUEST_ADD_FAVORITE:
+      return { ...state, isLoading: true }
+	  case FETCH_MOVIE_SUCCESS:
+	    return { ...state, selectedMovie: action.payload.data, isLoading: false }
     default:
-        return state;
+      return state;
   }
 }

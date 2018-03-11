@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import axios from 'axios';
+import { Input, Icon, Button, notifcation } from 'antd';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -11,10 +12,15 @@ class LoginPage extends Component {
         email: '',
         password: '',
         name: ''
-      }
+      },
+      visible: false
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+    const inputStyle = {
+      marginBottom: '20px'
+    }
   }
 
   handleFormSubmit(e) {
@@ -27,7 +33,7 @@ class LoginPage extends Component {
     .then((res) => {
       console.log(res)
       Auth.authenticateUser(res.data.token, res.data.user.email, res.data.user.name);
-      this.props.history.push('/');
+      this.props.alert()
     })
     .catch((errors) => {
       this.setState({
@@ -50,25 +56,33 @@ class LoginPage extends Component {
 
     return (
       <div>
-        <h1 style={{'fontWeight': 'bolder'}}>Login</h1>
+
         <form
           onSubmit={this.handleFormSubmit}
         >
-          Email:
-          <input
+          <Input
+            style={this.inputStyle}
+            placeholder="Enter your email"
+            prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)'}} />}
             name='email'
             onChange={this.handleInputChange}
           />
-          Password:
-          <input
+          <br/><br/>
+          <Input
+            style={this.inputStyle}
+            placeholder="Password please..."
+            prefix={<Icon type='key' style={{ color: 'rgba(0,0,0,.25)' }} />}
             name='password'
             onChange={this.handleInputChange}
           />
-          <button
-            type='submit'
+          <br/><br/>
+          <Button
+            type='primary'
+            onClick={this.handleFormSubmit}
           >
             Log In
-          </button>
+          </Button>
+
         </form>
       </div>
 

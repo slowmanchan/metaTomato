@@ -5,8 +5,10 @@ import Auth from '../modules/Auth';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
+
 export const REQUEST_FETCH_MOVIE = 'REQUEST_FETCH_MOVIE';
 export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES';
+export const REQUEST_ADD_FAVORITE = 'REQUEST_ADD_FAVORITE';
 
 export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_SUCCESS';
@@ -60,6 +62,17 @@ export function addFavorite(movie) {
 		type: ADD_FAVORITE,
 		payload: request
 	}
+}
+export function requestAddFavorites() {
+  return {
+    type: REQUEST_ADD_FAVORITE
+  }
+}
+
+export function addFavoriteThunk() {
+  return dispatch => {
+    dispatch(requestAddFavorites())
+  }
 }
 
 export function deleteFavorite(id) {
@@ -139,7 +152,7 @@ export function fetchMovieSuccess(data) {
 export function fetchMovieThunk(id) {
 	return dispatch => {
 		dispatch(requestFetchMovie())
-		
+
 		return axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
 		  .then((data) => dispatch(fetchMovieSuccess(data)))
 	}
