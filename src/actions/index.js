@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Auth from '../modules/Auth';
 
 export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
 
@@ -49,7 +50,7 @@ export function fetchUpcomingMoviesSuccess(data) {
 
 export function addFavorite(movie) {
   const url = '/api/favorites';
-  const data = { 'title': movie.Title, 'poster': movie.Poster }
+  const data = { 'title': movie.Title, 'poster': movie.Poster, 'imdbID': movie.imdbID }
   const headers = { headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     'Authorization': `bearer ${Auth.getToken()}`
@@ -58,10 +59,7 @@ export function addFavorite(movie) {
   const request = axios.post(url, data, headers)
     .catch((err) => { console.log('Not authorized')})
 
-	return {
-		type: ADD_FAVORITE,
-		payload: request
-	}
+	return request
 }
 export function requestAddFavorites() {
   return {
@@ -69,12 +67,20 @@ export function requestAddFavorites() {
   }
 }
 
-export function addFavoriteThunk() {
+export function addFavoriteThunk(movie) {
   return dispatch => {
     dispatch(requestAddFavorites())
+
+    return addFavorite(movie).then((data) => dispatch(addFavoriteSuccess(data)))
   }
 }
 
+export function addFavoriteSuccess(data) {
+  return {
+    type: ADD_FAVORITE_SUCCESS,
+    payload: data
+  }
+}
 export function deleteFavorite(id) {
   console.log(id)
   const url = '/api/favorites';

@@ -27,7 +27,7 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log(this.state.value)
+
     return (
 
        <Search

@@ -18,9 +18,8 @@ class MovieShow extends Component {
 		this.props.fetchMovieThunk(this.props.match.params.id)
 	}
 	render() {
-
+console.log(this.props)
 		const { movie } = this.props
-        console.log(this.props.isLoading)
 		if (!movie || this.props.isLoading) {
 			return (
 			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
@@ -30,9 +29,8 @@ class MovieShow extends Component {
 		}
 
 		const { Ratings, Genre } = movie;
-	
 		const formattedRatings = formatRatings(Ratings).map((formatRating, idx) => {
-			console.log(formatRating)
+
 		  return (
 		    <div key={uniqid()} style={{ display: 'inline-block'}}>
 			  <Progress
@@ -47,8 +45,8 @@ class MovieShow extends Component {
 			</div>
 		  )
 		});
-	
-		
+
+
 		const genres = Genre.split(',').map((item) => {
 				return (
 					<Tag
@@ -59,14 +57,14 @@ class MovieShow extends Component {
 					</Tag>
 				)
 			})
-        
+
 		return (
 
 					<div style={{ margin: '40px' }}>
 						<Row>
 							<Col xs={24} md={8}>
 							  <div style={{ margin: '0 40px 40px 0'}}>
-								<img style={{maxWidth: '100%'}} src={movie.Poster}/>
+									<img style={{maxWidth: '100%'}} src={movie.Poster}/>
 							  </div>
 							</Col>
 							<Col xs={24} md={16}>

@@ -14,7 +14,7 @@ class ProfileMenu extends  Component {
   }
 
   render() {
-    console.log(this.props)
+
     const onClick = ({key}) => {
       if (key === '0') { console.log(key) }
       else if (key === '1') { console.log(key) }
@@ -40,7 +40,7 @@ class ProfileMenu extends  Component {
     return (
       <Dropdown overlay={menu} trigger={['click']}>
         <Avatar >
-
+          {localStorage.getItem('name')}
         </Avatar>
       </Dropdown>
     )

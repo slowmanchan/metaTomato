@@ -15,32 +15,34 @@ class FavoritesList extends Component {
 	}
 
 	render() {
-
+    console.log(this.props.favorites)
 	  const { favorites } = this.props
 
 		if (!favorites) {
-			return <div>Loading...</div>
+			return <div>Add Some Favorites</div>
 		}
 
 	  const favoritesList = favorites.map((favorite) => {
-			return (				
+			return (
 				<Col key={uniqid()} xs={24} sm={12} md={8} lg={4}>
-					<Card
-					  style={{width: '170px', margin: '20px 10px'}}
-					  hoverable
-					  cover={<img style={{height: '250px'}} alt="example" src={movie.Poster} />}>
-					  <Meta
-						title={movie.Title}
-					  />
-					</Card>
+					<Link to={`/movie/${favorite.imdbID}`}>
+						<Card
+							style={{width: '170px', margin: '20px 10px'}}
+							hoverable
+							cover={<img style={{height: '250px'}} alt="example" src={favorite.poster} />}>
+							<Meta
+								title={favorite.title}
+							/>
+						</Card>
+					</Link>
 				</Col>
 			)
 
 	})
 
-	return (  
+	return (
 				<div>
-					{favoritesList}
+					<Row>{favoritesList}</Row>
 				</div>
 	  )
 	}

@@ -1,5 +1,5 @@
 import {
-  ADD_FAVORITE, DELETE_FAVORITE,
+  ADD_FAVORITE, DELETE_FAVORITE,ADD_FAVORITE_SUCCESS,
   FETCH_FAVORITES, REQUEST_FETCH_MOVIES, FETCH_MOVIES_SUCCESS,
   REQUEST_FETCH_UPCOMING_MOVIES, FETCH_UPCOMING_MOVIES_SUCCESS,
   FETCH_MOVIE_SUCCESS, REQUEST_FETCH_MOVIE, REQUEST_ADD_FAVORITE
@@ -9,7 +9,9 @@ import _ from 'lodash';
 export default function(state = {
   upComingMoviesList: [],
   movieList: [],
-  isLoading: false
+  isLoading: false,
+  isButtonLoading: false,
+  favorites: []
 }, action) {
   switch(action.type) {
   	case ADD_FAVORITE:
@@ -30,9 +32,12 @@ export default function(state = {
 	  case REQUEST_FETCH_MOVIE:
 	    return { ...state, isLoading: true }
     case REQUEST_ADD_FAVORITE:
-      return { ...state, isLoading: true }
+      return { ...state, isButtonLoading: true }
 	  case FETCH_MOVIE_SUCCESS:
 	    return { ...state, selectedMovie: action.payload.data, isLoading: false }
+    case ADD_FAVORITE_SUCCESS:
+       console.log(action.payload)
+       return { ...state, favoritesList: state.favorites.push(action.payload), isButtonLoading: false}
     default:
       return state;
   }

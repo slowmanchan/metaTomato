@@ -60,12 +60,15 @@ class SiderNav extends React.Component {
           </Link>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
-              <Icon type="heart-o" />
-              <span>Favorites</span>
+              <Link to='/favorites'>
+                <Icon type="heart-o" />
+                <span>Favorites</span>
+              </Link>
+
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="desktop" />
-              <span>Option 2</span>
+              <span>Watch List</span>
             </Menu.Item>
             <SubMenu
               key="sub1"
@@ -133,10 +136,10 @@ class SiderNav extends React.Component {
 
                 </Popover>
                 ]
-                }
+              }
 
-              </div>
-                </Header>
+            </div>
+          </Header>
           <Content>
 
             {this.props.children}

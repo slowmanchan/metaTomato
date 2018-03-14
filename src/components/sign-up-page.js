@@ -31,6 +31,7 @@ class SignUpPage extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
+
     axios.post('/auth/signup', {
       email: this.state.user.email,
       password: this.state.user.password,
@@ -41,13 +42,16 @@ class SignUpPage extends Component {
       this.props.alert()
     })
     .catch((errors) => {
+      console.log(errors)
       this.setState({
         errors
       })
+
     })
   }
 
   render() {
+    console.log(this.state.errors)
     return (
 
       <div>
