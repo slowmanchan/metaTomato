@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Input, Icon, Button } from 'antd';
 
 class SignUpPage extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class SignUpPage extends Component {
     })
     .then((res) => {
       localStorage.setItem('successMessage', res.message)
-      this.props.history.push('/login')
+      this.props.alert()
     })
     .catch((errors) => {
       this.setState({
@@ -48,26 +49,44 @@ class SignUpPage extends Component {
 
   render() {
     return (
+
       <div>
-        <h3>Sign Up</h3>
-        <form onSubmit={this.handleFormSubmit}>
-          Email:
-          <input
-            name='email'
-            onChange={this.handleInputChange}
-          />
-          Password:
-          <input
-            name='password'
-            onChange={this.handleInputChange}
-          />
-          Name:
-          <input
-            name='name'
-            onChange={this.handleInputChange}
-          />
-          <button type='submit'>Sign Up</button>
-        </form>
+
+
+        <Input
+          style={this.inputStyle}
+          placeholder="Enter your name..."
+          prefix={<Icon type='key' style={{ color: 'rgba(0,0,0,.25)' }} />}
+          name='name'
+          onChange={this.handleInputChange}
+        />
+        <br/><br/>
+        <Input
+          style={this.inputStyle}
+          placeholder="Enter your email"
+          prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)'}} />}
+          name='email'
+          onChange={this.handleInputChange}
+        />
+        <br/><br/>
+        <Input
+          style={this.inputStyle}
+          placeholder="Password please..."
+          prefix={<Icon type='key' style={{ color: 'rgba(0,0,0,.25)' }} />}
+          name='password'
+          onChange={this.handleInputChange}
+        />
+
+        <br/><br/>
+        <Button
+          style={{ width: '100%' }}
+          type='primary'
+          onClick={this.handleFormSubmit}
+        >
+          Sign Up
+        </Button>
+
+
       </div>
     )
   }

@@ -5,25 +5,38 @@ const Search = Input.Search;
 import SearchBar  from './search-bar';
 import SearchResults from './movie-list';
 import LoginPage from './login-page';
+import SignUpPage from './sign-up-page';
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
+import ProfileMenu from './profile-menu';
+import Auth from '../modules/Auth';
+import uniqid  from 'uniqid';
 
 class SiderNav extends React.Component {
   state = {
     collapsed: false,
-    visible: false,
+    login: {
+      visible: false,
+    },
+    signup: {
+      visible: false,
+    },
     alert: false
   };
 
   hide = () => {
     this.setState({
-      visble: false,
+      visible: false,
     });
   }
 
-  handleVisibleChange = (visible) => {
-    this.setState({ visible });
+  handleLoginVisibleChange = (visible) => {
+    this.setState({login: { visible }} );
+  }
+
+  handleSignupVisibleChange = (visible) => {
+    this.setState({ signup: { visible } });
   }
 
   onCollapse = (collapsed) => {
@@ -32,6 +45,7 @@ class SiderNav extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
@@ -77,29 +91,52 @@ class SiderNav extends React.Component {
               <SearchBar/>
             </div>
             <div style={{ display: 'inline-block', width: '60%', textAlign: 'right' }}>
-              <Popover
-                visible={this.state.visible}
-                content={<LoginPage alert={() => {
+              { Auth.isUserAuthenticated() ? <ProfileMenu/> : [<Popover
+                key={uniqid()}
+                content={<LoginPage  alert={() => {
                   {notification.success({
-                     message: 'Login Success',
+                      message: 'Login Success',
                   })}
                   this.setState({
-                    visible: false
+                    login: {
+                        visible: false
+                    }
                   })
                 }}/>}
                 title='Log In'
                 trigger='click'
-                visible={this.state.visible}
-                onVisibleChange={this.handleVisibleChange}
-              >
+                visible={this.state.login.visible}
+                onVisibleChange={this.handleLoginVisibleChange}
+                                                               >
                 <Button type='primary' ghost>Login</Button>
 
               </Popover>
+                ,
+                <Popover
+                  key={uniqid()}
+                  content={<SignUpPage  alert={() => {
+                    {notification.success({
+                      message: 'Sign Up Success',
+                    })}
+                    this.setState({
+                      signup: {
+                        visible: false
+                      }
+                    })
+                  }}/>}
+                  title='Sign Up'
+                  trigger='click'
+                  visible={this.state.signup.visible}
+                  onVisibleChange={this.handleSignupVisibleChange}
+                >
+                  <Button type='danger' ghost>Sign Up</Button>
 
-              <Button type='primary' ghost>Sign Up</Button>
+                </Popover>
+                ]
+                }
 
-            </div>
-          </Header>
+              </div>
+                </Header>
           <Content>
 
             {this.props.children}

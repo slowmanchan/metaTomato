@@ -77,6 +77,7 @@ class LoginPage extends Component {
           />
           <br/><br/>
           <Button
+            style={{ width: '100%' }}
             type='primary'
             onClick={this.handleFormSubmit}
           >

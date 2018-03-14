@@ -23,11 +23,11 @@ class Home extends Component {
     const movies = upComingMovies.slice(0,6).map((movie) => {
       return (
         <div style={{ position: 'relative' }} key={uniqid()}>
-			  <img
-				style={{ marginLeft: 'auto'}}
-				src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-			  />
-		  
+          <img
+            style={{ marginLeft: 'auto', overflow: 'hidden'}}
+            src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+          />
+
           <div style={{  position: 'absolute', bottom: '48px', left: '46px', color: 'white' }}>
             <h1 style={{ color: 'white'}}>{movie.title}</h1>
             <p>{movie.overview.slice(0, 60)}...</p>
@@ -39,12 +39,16 @@ class Home extends Component {
 
     return (
       <Row>
-        <Col xs={24} >
-          <Carousel style={{background: 'black'}}>
-            {movies}
-          </Carousel>
-        </Col>
-      </Row>
+        <div style={{ margin: '20px'}}>
+          <Col xs={24} >
+            <Carousel
+              autoplay
+              style={{background: 'black'}}>
+              {movies}
+            </Carousel>
+          </Col>
+        </div>
+    </Row>
 
 
 
