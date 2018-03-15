@@ -7,14 +7,14 @@ import AddFavorite from './add-favorite';
 const TabPane = Tabs.TabPane;
 
 const MovieShow = (props) => {
-	const { movie } = this.props;
+	const { movie, isLoading } = this.props;
 	
-	if (!movie || this.props.isLoading) {
-			return (
-			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
-			    <Spin tip='Gimme a sec....' size='large' />
-			  </div>
-			)
+	if (!movie || isLoading) {
+		return (
+		  <div style={{ marginTop: '100px', textAlign: 'center'}}>
+			<Spin tip='Gimme a sec....' size='large' />
+		  </div>
+		)
 	}
 	
 	const { Ratings, Genre } = movie;
