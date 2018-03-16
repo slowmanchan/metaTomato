@@ -15,7 +15,6 @@ class FavoritesList extends Component {
 	}
 
 	render() {
-    console.log(this.props.favorites)
 	  const { favorites } = this.props
 
 		if (!favorites) {

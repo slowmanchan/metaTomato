@@ -33,16 +33,16 @@ console.log(this.props)
 
 		  return (
 		    <div key={uniqid()} style={{ display: 'inline-block'}}>
-			  <Progress
-				type="circle"
-				percent={formatRating.rating}
-				width={80}
-				strokeWidth={10}
-			  />
-			  <div style={{fontStyle: 'italic',margin: '10px',width: '60px', display: 'inline-block'}}>
-			    {formatRating.name}
-			  </div>
-			</div>
+					<Progress
+						type="circle"
+						percent={formatRating.rating}
+						width={80}
+						strokeWidth={10}
+					/>
+					<div style={{fontStyle: 'italic',margin: '10px',width: '60px', display: 'inline-block'}}>
+						{formatRating.name}
+					</div>
+				</div>
 		  )
 		});
 

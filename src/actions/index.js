@@ -1,8 +1,9 @@
 import axios from 'axios';
 import _ from 'lodash';
 import Auth from '../modules/Auth';
+import { message } from 'antd';
 
-export const ADD_FAVORITE = 'ADD_FAVORITE';
+
 export const ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
@@ -71,7 +72,10 @@ export function addFavoriteThunk(movie) {
   return dispatch => {
     dispatch(requestAddFavorites())
 
-    return addFavorite(movie).then((data) => dispatch(addFavoriteSuccess(data)))
+    return addFavorite(movie).then((data) => {
+      dispatch(addFavoriteSuccess(data))
+      message.info('Favorite Added')
+    })
   }
 }
 

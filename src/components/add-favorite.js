@@ -1,27 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addFavoriteThunk } from '../actions';
-import { Button, Icon } from 'antd';
+import { Button, Icon, message } from 'antd';
 
 class AddFavorite extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      iconLoading: false
-    }
-    this.enterLoading = this.enterLoading.bind(this);
-    this.enterIconLoading = this.enterIconLoading.bind(this);
-  }
-
-  enterLoading() {
-    this.setState( { loading: true });
-  }
-
-  enterIconLoading() {
-    this.setState( { iconLoading: true });
-  }
-
   render() {
     console.log('btton', this.props)
     return(
@@ -29,6 +11,7 @@ class AddFavorite extends Component {
       loading={this.props.isButtonLoading}
 	    onClick={() => {
         this.props.addFavoriteThunk(this.props.movie)
+        
 
       }}
       icon='heart'

@@ -14,9 +14,6 @@ export default function(state = {
   favorites: []
 }, action) {
   switch(action.type) {
-  	case ADD_FAVORITE:
-  	  const favorites = []
-  	  return { ...state, favoritesList: favorites.push(action.payload)}
   	case DELETE_FAVORITE:
   	  return {...state, favorites: _.reject(state.favorites, (fav) => { return fav._id === action.payload})}
   	case FETCH_FAVORITES:
@@ -36,7 +33,6 @@ export default function(state = {
 	  case FETCH_MOVIE_SUCCESS:
 	    return { ...state, selectedMovie: action.payload.data, isLoading: false }
     case ADD_FAVORITE_SUCCESS:
-       console.log(action.payload)
        return { ...state, favoritesList: state.favorites.push(action.payload), isButtonLoading: false}
     default:
       return state;
