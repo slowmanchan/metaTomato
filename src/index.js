@@ -18,7 +18,6 @@ import SignUpPage from './components/sign-up-page';
 import LoginPage from './components/login-page';
 
 require('../style/style.scss')
-require('../style/bootstrap.scss')
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk, ReduxPromise)(createStore);
 
