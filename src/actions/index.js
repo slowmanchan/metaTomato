@@ -85,6 +85,14 @@ export function addFavoriteSuccess(data) {
     payload: data
   }
 }
+
+export function deleteFavoriteThunk(id) {
+  return dispatch => {
+    dispatch(requestDeleteFavorites())
+
+    return deleteFavorte(id).then((id) => {})
+  }
+}
 export function deleteFavorite(id) {
   console.log(id)
   const url = '/api/favorites';
