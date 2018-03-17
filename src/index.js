@@ -7,15 +7,16 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
-import MovieList from './components/movie-list';
-import MovieShow from './components/movie-show';
+
 import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
 
 import SiderNav from './components/sider';
 import Home from './components/home';
-import SignUpPage from './components/sign-up-page';
-import LoginPage from './components/login-page';
+
+import SearchResults from './components/SearchResults';
+import SearchResultsContainer from './containers/SearchResultsContainer';
+import MovieShowContainer from './containers/MovieShowContainer';
 
 require('../style/style.scss')
 
@@ -29,11 +30,11 @@ ReactDOM.render(
         <SiderNav>
 
           <Switch>
-            <Route path='/login' component={LoginPage} />
-            <Route path='/sign-up' component={SignUpPage} />
+            <Route path='/test' component={SearchResultsContainer} />
+
             <Route path='/favorites' component={FavoritesList} />
-            <Route path='/search-results' component={MovieList} />
-            <Route path='/movie/:id' component={MovieShow} />
+            <Route path='/search-results' component={SearchResultsContainer} />
+            <Route path='/movie/:id' component={MovieShowContainer} />
             <Route path='/' component={Home} />
 
           </Switch>

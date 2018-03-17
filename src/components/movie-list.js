@@ -14,7 +14,7 @@ class MovieList extends Component {
 
   render() {
     console.log(this.props)
-  	const { moviesList } = this.props
+  	const { moviesList, isLoading } = this.props
   	if (!moviesList || this.props.isLoading) {
 			return (
 			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
@@ -27,14 +27,14 @@ class MovieList extends Component {
     return (
 		<Col key={uniqid()} xs={24} sm={12} md={8} lg={4}>
 		  <Link to={`/movie/${movie.imdbID}`}>
-			<Card
-			  style={{width: '170px', margin: '20px 10px'}}
-			  hoverable
-			  cover={<img style={{height: '250px'}} alt="example" src={movie.Poster} />}>
-			  <Meta
-				title={movie.Title}
-			  />
-			</Card>
+        <Card
+          style={{width: '170px', margin: '20px 10px'}}
+          hoverable
+          cover={<img style={{height: '250px'}} alt="example" src={movie.Poster} />}>
+          <Meta
+            title={movie.Title}
+          />
+        </Card>
 		  </Link>
 
 		</Col>

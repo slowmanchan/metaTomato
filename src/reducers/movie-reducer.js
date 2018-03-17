@@ -21,6 +21,7 @@ export default function(state = {
     case REQUEST_FETCH_MOVIES:
       return { ...state, isLoading: true}
     case FETCH_MOVIES_SUCCESS:
+    console.log(action.payload)
       return { ...state, moviesList: action.payload.data.Search, isLoading: false }
     case REQUEST_FETCH_UPCOMING_MOVIES:
       return { ...state, isLoading: true }
