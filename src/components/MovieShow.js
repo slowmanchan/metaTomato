@@ -16,7 +16,7 @@ class MovieShow extends Component {
 
 	render() {
 		const { movie, isLoading } = this.props;
-    console.log(this.props)
+
 		if (!movie || isLoading) {
 			return (
 			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
@@ -26,7 +26,7 @@ class MovieShow extends Component {
 		}
 
 		const { Ratings, Genre } = movie;
-    console.log(movie)
+
 		const formattedRatings = formatRatings(Ratings).map((formatRating, idx) => {
 			  return (
 			    <div key={uniqid()} style={{ display: 'inline-block'}}>

@@ -3,7 +3,6 @@ const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const Search = Input.Search;
 import SearchBar  from './search-bar';
-import SearchResults from './movie-list';
 import LoginPage from './login-page';
 import SignUpPage from './sign-up-page';
 import React from 'react';
@@ -94,7 +93,7 @@ class SiderNav extends React.Component {
               <SearchBar/>
             </div>
             <div style={{ display: 'inline-block', width: '60%', textAlign: 'right' }}>
-              { Auth.isUserAuthenticated() ? <ProfileMenu/> : [<Popover
+              { Auth.isUserAuthenticated() ? <ProfileMenu/> : <Popover
                 key={uniqid()}
                 content={<LoginPage  alert={() => {
                   {notification.success({
@@ -110,32 +109,11 @@ class SiderNav extends React.Component {
                 trigger='click'
                 visible={this.state.login.visible}
                 onVisibleChange={this.handleLoginVisibleChange}
-                                                               >
+                                                              >
                 <Button type='primary' ghost>Login</Button>
 
               </Popover>
-                ,
-                <Popover
-                  key={uniqid()}
-                  content={<SignUpPage  alert={() => {
-                    {notification.success({
-                      message: 'Sign Up Success',
-                    })}
-                    this.setState({
-                      signup: {
-                        visible: false
-                      }
-                    })
-                  }}/>}
-                  title='Sign Up'
-                  trigger='click'
-                  visible={this.state.signup.visible}
-                  onVisibleChange={this.handleSignupVisibleChange}
-                >
-                  <Button type='danger' ghost>Sign Up</Button>
 
-                </Popover>
-                ]
               }
 
             </div>

@@ -11,12 +11,11 @@ import ReduxPromise from 'redux-promise';
 import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
 
-import SiderNav from './components/sider';
 import Home from './components/home';
-
-import SearchResults from './components/SearchResults';
 import SearchResultsContainer from './containers/SearchResultsContainer';
 import MovieShowContainer from './containers/MovieShowContainer';
+import AppLayout from './components/AppLayout';
+import SignupForm from './containers/SignupContainer';
 
 require('../style/style.scss')
 
@@ -26,20 +25,16 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
-
-        <SiderNav>
-
+        <AppLayout>
           <Switch>
+            <Route path='/sign-up' component={SignupForm} />
             <Route path='/test' component={SearchResultsContainer} />
-
             <Route path='/favorites' component={FavoritesList} />
             <Route path='/search-results' component={SearchResultsContainer} />
             <Route path='/movie/:id' component={MovieShowContainer} />
             <Route path='/' component={Home} />
-
           </Switch>
-        </SiderNav>
-
+        </AppLayout>
       </div>
     </BrowserRouter>
   </Provider>
