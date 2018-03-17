@@ -66,7 +66,7 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 								<Button
 									style={style.button}
 									type='primary'
-									onChange={() => { handleFormSubmit }}
+									onClick={(e) => { handleFormSubmit(e) }}
 								>
 									Sign Up
 								</Button>

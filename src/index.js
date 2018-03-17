@@ -15,7 +15,7 @@ import Home from './components/home';
 import SearchResultsContainer from './containers/SearchResultsContainer';
 import MovieShowContainer from './containers/MovieShowContainer';
 import AppLayout from './components/AppLayout';
-import SignupForm from './containers/SignupContainer';
+import SignupContainer from './containers/SignupContainer';
 
 require('../style/style.scss')
 
@@ -27,7 +27,7 @@ ReactDOM.render(
       <div>
         <AppLayout>
           <Switch>
-            <Route path='/sign-up' component={SignupForm} />
+            <Route path='/sign-up' component={SignupContainer} />
             <Route path='/test' component={SearchResultsContainer} />
             <Route path='/favorites' component={FavoritesList} />
             <Route path='/search-results' component={SearchResultsContainer} />

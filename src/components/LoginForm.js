@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Button, Icon } from 'antd';
 
-const LoginForm = ({ handleFormSubmit, handleInputChange }) => {
+const LoginForm = ({ handleFormSubmit, handleInputChange, handleCancel}) => {
 	const style = {
     input: {
 		  marginBottom: '10px'
@@ -31,12 +31,14 @@ const LoginForm = ({ handleFormSubmit, handleInputChange }) => {
 			<Button
 				style={{ width: '100%' }}
 				type='primary'
-				onClick={(e) => { handleFormSubmit(e) }}
+				onClick={(e) => {
+					handleFormSubmit(e)
+				}}
 			>
 				Log In
 			</Button>
 			<br/><br/>
-			Dont have an Account? <Link to='/sign-up'>Sign up</Link>
+			Dont have an Account? <Link to='/sign-up' onClick={() => handleCancel()}>Sign up</Link>
 		</div>
   )
 }

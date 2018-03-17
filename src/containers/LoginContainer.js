@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import axios from 'axios';
 import LoginForm from '../components/LoginForm';
+import { withRouter } from 'react-router-dom';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -26,9 +27,9 @@ class LoginContainer extends Component {
       password: this.state.user.password
     })
     .then((res) => {
-      console.log(res)
       Auth.authenticateUser(res.data.token, res.data.user.email, res.data.user.name);
-      this.props.alert()
+      this.props.handleOk();
+      this.props.history.push('/');
     })
     .catch((errors) => {
       this.setState({
@@ -48,14 +49,15 @@ class LoginContainer extends Component {
   }
 
   render() {
-    console.log(this.state.user)
     return (
        <LoginForm
-	     handleFormSubmit={this.handleFormSubmit}
-		 handleInputChange={this.handleInputChange}
+         handleOk={this.props.handleOk}
+         handleCancel={this.props.handleCancel}
+         handleFormSubmit={this.handleFormSubmit}
+         handleInputChange={this.handleInputChange}
  	   />
     )
   }
 }
 
-export default LoginContainer;
+export default withRouter(LoginContainer);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SignupForm from '../components/SignupForm';
+import { withRouter } from 'react-router-dom';
 
-class SignUpPage extends Component {
+class SignupContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -37,8 +38,9 @@ class SignUpPage extends Component {
       name: this.state.user.name
     })
     .then((res) => {
-      localStorage.setItem('successMessage', res.message)
-      this.props.alert()
+      localStorage.setItem('successMessage', res.message);
+      console.log('succuess');
+            this.props.history.push('/login');
     })
     .catch((errors) => {
       this.setState({
@@ -49,12 +51,12 @@ class SignUpPage extends Component {
 
   render() {
     return (
-      <SignupForm 
-	    handleFormSubmit={this.handleFormSubmit}
+      <SignupForm
+        handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
-	  />
+      />
     )
   }
 }
 
-export default SignUpPage;
+export default withRouter(SignupContainer);

@@ -27,7 +27,7 @@ router.post('/signup', (req, res, next) => {
 					}
 				})
 			}
-
+      console.log(err)
 			return res.status(400).json({
 				success: false,
 				message: 'Could not process the form.'
