@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUpcomingMovies } from '../actions';
-import Sider from './sider';
 import uniqid from 'uniqid';
 import axios from 'axios';
 import Auth from '../modules/Auth';

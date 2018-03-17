@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMovies, fetchMoviesThunk } from '../actions'
+import { fetchMoviesThunk } from '../actions'
 import { withRouter } from 'react-router-dom'
 import { Input } from 'antd';
 const Search = Input.Search;
@@ -29,7 +29,6 @@ class SearchBar extends Component {
   render() {
 
     return (
-
        <Search
          type="text"
          placeholder="Search for a movie...."
@@ -44,4 +43,4 @@ class SearchBar extends Component {
 }
 
 
-export default withRouter(connect(null, { fetchMovies, fetchMoviesThunk })(SearchBar));
+export default withRouter(connect(null, { fetchMoviesThunk })(SearchBar));
