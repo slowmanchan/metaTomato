@@ -39,7 +39,7 @@ class LoginModal extends Component {
       return (
           <div>
             <Button type="primary" onClick={this.showModal}>Login</Button>
-            <Modal title="Title"
+            <Modal title="Log In"
               visible={visible}
               confirmLoading={confirmLoading}
               footer={''}

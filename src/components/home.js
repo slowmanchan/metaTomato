@@ -4,14 +4,13 @@ import { fetchUpcomingMovies } from '../actions';
 import uniqid from 'uniqid';
 import axios from 'axios';
 import Auth from '../modules/Auth';
-import { Carousel, Row, Col } from 'antd';
+import { Carousel, Row, Col, List } from 'antd';
 import 'antd/dist/antd.css'
 
 class Home extends Component {
   componentDidMount() {
     this.props.fetchUpcomingMovies()
   }
-
 
   render() {
     const { upComingMovies } = this.props;
@@ -36,19 +35,24 @@ class Home extends Component {
       )
     })
 
+    const moviesList = upComingMovies.slice(6)
+     console.log(moviesList)
     return (
-      <Row>
-        <div style={{ margin: '20px'}}>
-          <Col xs={24} >
-            <Carousel
-              autoplay
-              style={{background: 'black'}}>
-              {movies}
-            </Carousel>
-          </Col>
-        </div>
-    </Row>
-
+          <Row>
+            <div style={{ margin: '20px'}}>
+              <Col xs={16} >
+                <Carousel
+                  autoplay
+                  style={{background: 'black'}}>
+                  {movies}
+                </Carousel>
+              </Col>
+              <Col xs={8}>
+                <img src=
+                  {`https://image.tmdb.org/t/p/w500/${moviesList[1].backdrop_path}`}/>
+              </Col>
+            </div>
+          </Row>
 
 
     )

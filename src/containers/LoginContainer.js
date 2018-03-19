@@ -3,12 +3,14 @@ import Auth from '../modules/Auth';
 import axios from 'axios';
 import LoginForm from '../components/LoginForm';
 import { withRouter } from 'react-router-dom';
+import { message } from 'antd';
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      errors: {},
+      errorData: {},
+      isLoading: false,
       user: {
         email: '',
         password: '',
@@ -22,6 +24,10 @@ class LoginContainer extends Component {
   handleFormSubmit(e) {
     e.preventDefault()
 
+    this.setState({
+      isLoading: true
+    })
+
     axios.post('/auth/login', {
       email: this.state.user.email,
       password: this.state.user.password
@@ -29,11 +35,16 @@ class LoginContainer extends Component {
     .then((res) => {
       Auth.authenticateUser(res.data.token, res.data.user.email, res.data.user.name);
       this.props.handleOk();
+      message.success('You have logged in Successfully!!');
+      this.setState({
+        isLoading: false
+      })
       this.props.history.push('/');
     })
     .catch((errors) => {
       this.setState({
-        errors
+        errorData: errors.response.data,
+        isLoading: false
       })
     })
   }
@@ -51,6 +62,9 @@ class LoginContainer extends Component {
   render() {
     return (
        <LoginForm
+
+         errorData={this.state.errorData}
+         isLoading={this.state.isLoading}
          handleOk={this.props.handleOk}
          handleCancel={this.props.handleCancel}
          handleFormSubmit={this.handleFormSubmit}
