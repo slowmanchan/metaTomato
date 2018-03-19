@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SignupForm from '../components/SignupForm';
 import { withRouter } from 'react-router-dom';
+import { message } from 'antd';
 
 class SignupContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      errors: {},
+      isLoading: false,
+      errorData: {},
       user: {
         email: '',
         name: '',
@@ -31,7 +33,9 @@ class SignupContainer extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-
+    this.setState({
+      isLoading: true
+    })
     axios.post('/auth/signup', {
       email: this.state.user.email,
       password: this.state.user.password,
@@ -39,12 +43,16 @@ class SignupContainer extends Component {
     })
     .then((res) => {
       localStorage.setItem('successMessage', res.message);
-      console.log('succuess');
-            this.props.history.push('/login');
+      message.success('You have Signed up successfully! Please check you email!')
+      this.setState({
+        isLoading: false
+      })
+      this.props.history.push('/');
     })
     .catch((errors) => {
       this.setState({
-        errors
+        errorData: errors.response.data,
+        isLoading: false
       })
     })
   }
@@ -52,6 +60,8 @@ class SignupContainer extends Component {
   render() {
     return (
       <SignupForm
+        isLoading={this.state.isLoading}
+        errorData={this.state.errorData}
         handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
       />

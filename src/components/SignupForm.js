@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Input, Icon, Button } from 'antd';
 const FormItem = Form.Item;
 
-const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
+const SignupForm = ({ handleFormSubmit, handleInputChange, errorData, isLoading }) => {
 	const style = {
       input: {
 
@@ -23,6 +23,9 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 				fontWeight: '900',
 				backgroundColor: '#f5da55',
 				color: 'darken(0.5, #f5da55)'
+			},
+			errorMessage: {
+				color: 'red'
 			}
   }
 
@@ -31,10 +34,13 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 
 				<Row>
 					<Col xs={24} md={12}>
-						<h1>Register your account dude</h1>
-						<Form>
-							<FormItem>
+						<h1>Register your account</h1>
+						<span style={style.errorMessage}>{errorData ? errorData.message : null}</span>
 
+						<Form>
+							<span style={style.errorMessage}>{errorData.errors ? errorData.errors.name : null}</span>
+
+							<FormItem>
 
 								<Input
 									style={style.input}
@@ -44,7 +50,10 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 									onChange={(e) => { handleInputChange(e)}}
 								/>
 							</FormItem>
+							<span style={style.errorMessage}>{errorData.errors ? errorData.errors.email : null}</span>
+
 							<FormItem>
+
 								<Input
 									style={style.input}
 									placeholder="Enter your email"
@@ -53,6 +62,8 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 									onChange={(e) => { handleInputChange(e)}}
 								/>
 							</FormItem>
+							<span style={style.errorMessage}>{errorData.errors ? errorData.errors.password : null}</span>
+
 							<FormItem>
 								<Input
 									style={style.input}
@@ -63,7 +74,9 @@ const SignupForm = ({ handleFormSubmit, handleInputChange }) => {
 								/>
 							</FormItem>
 							<FormItem>
+
 								<Button
+									loading={isLoading}
 									style={style.button}
 									type='primary'
 									onClick={(e) => { handleFormSubmit(e) }}
