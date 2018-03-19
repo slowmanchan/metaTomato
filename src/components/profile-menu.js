@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Avatar, Menu, Dropdown, Icon } from 'antd';
 import Auth from '../modules/Auth';
 import { withRouter } from 'react-router';
+import { message } from 'antd';
 
 class ProfileMenu extends  Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class ProfileMenu extends  Component {
       if (key === '0') { console.log(key) }
       else if (key === '1') { console.log(key) }
       else if (key === '2') {
-        this.logout()
+        this.logout();
+        message.success('Log out confirmed! Well Done')
         this.props.history.push('/')
       }
     }
