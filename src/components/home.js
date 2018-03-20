@@ -4,7 +4,9 @@ import { fetchUpcomingMovies } from '../actions';
 import uniqid from 'uniqid';
 import axios from 'axios';
 import Auth from '../modules/Auth';
-import { Carousel, Row, Col, List } from 'antd';
+import { Carousel, Row, Col, List, Card } from 'antd';
+const { Meta } = Card;
+
 import 'antd/dist/antd.css'
 
 class Home extends Component {
@@ -13,6 +15,15 @@ class Home extends Component {
   }
 
   render() {
+    const style = {
+      upComingList: {
+        padding: '20px',
+        backgroundColor: '#f5da55',
+        height: '280px',
+        overflow: 'auto'
+      }
+    }
+
     const { upComingMovies } = this.props;
     if (upComingMovies.length == 0) {
       return <div></div>
@@ -35,25 +46,46 @@ class Home extends Component {
       )
     })
 
-    const moviesList = upComingMovies.slice(6)
+    const moviesList = upComingMovies.slice(6, 14).map((movie) => {
+      return (
+        <Col xs={24} md={6}>
+          <Card
+            hoverable
+            style={{margin: '10px'}}
+            cover={<img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>}
+          >
+            <Meta
+              title={movie.title}
+              description={movie.overview.slice(0, 100)}
+            />
+          </Card>
+        </Col>
+          )
+    })
      console.log(moviesList)
     return (
-          <Row>
-            <div style={{ margin: '20px'}}>
-              <Col xs={16} >
-                <Carousel
-                  autoplay
-                  style={{background: 'black'}}>
-                  {movies}
-                </Carousel>
-              </Col>
-              <Col xs={8}>
-                <img src=
-                  {`https://image.tmdb.org/t/p/w500/${moviesList[1].backdrop_path}`}/>
-              </Col>
-            </div>
-          </Row>
+      <div>
+        <Row>
+          <div style={{ margin: '20px'}}>
+            <Col xs={24} >
+              <Carousel
+                autoplay
+                style={{background: 'black'}}>
+                {movies}
+              </Carousel>
+            </Col>
 
+          </div>
+        </Row>
+        <Row>
+          <div style={{margin: '20px'}}>
+            <h1>Upcoming Movies</h1>
+            <div>
+              {moviesList}
+            </div>
+          </div>
+          </Row>
+        </div>
 
     )
   }
