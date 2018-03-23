@@ -32,8 +32,10 @@ class FavoritesList extends Component {
 							<Meta
 								title={favorite.title}
 							/>
+
 						</Card>
 					</Link>
+					<button onClick={(id) => { this.props.deleteFavorite(favorite._id)}}>x</button>
 				</Col>
 			)
 
@@ -41,6 +43,7 @@ class FavoritesList extends Component {
 
 	return (
 				<div>
+					<h1>Favorites</h1>
 					<Row>{favoritesList}</Row>
 				</div>
 	  )

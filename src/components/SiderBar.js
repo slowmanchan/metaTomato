@@ -26,8 +26,12 @@ const SiderBar = ({ hide, onCollapse, collapsed }) => {
 			/>
 			<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
 				<Menu.Item key="1">
-					<Icon type="heart-o" />
-					<span>Favorites</span>
+					<Link to='/favorites'>
+
+
+						<Icon type="heart-o" />
+						<span>Favorites</span>
+					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
 					<Icon type="desktop" />

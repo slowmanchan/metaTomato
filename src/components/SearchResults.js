@@ -19,7 +19,7 @@ class SearchResults extends Component {
 
     if (!moviesList) {
       return (
-        <div>Search for something</div>
+        <div></div>
       )
     }
 

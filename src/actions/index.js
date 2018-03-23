@@ -107,7 +107,7 @@ export function deleteFavorite(id) {
     url,
     data,
     headers
-  })
+  }).then(() => {message.success('Deleted Favorite')})
 
 	return {
 		type: DELETE_FAVORITE,
