@@ -3,22 +3,25 @@ import { Link } from 'react-router-dom';
 import { Card, Row, Col, Spin } from 'antd';
 import uniqid from 'uniqid';
 const { Meta } = Card;
-
+// _.debounce((term) => { this.videoSearch(term), 300})
 class SearchResults extends Component {
-  componentDidMount() {
-  	const { fetchMoviesThunk, moviesList } = this.props;
-    !moviesList ? fetchMoviesThunk('jack') : null;
-  }
+
 
   render() {
   	const { moviesList, isLoading } = this.props;
-  	if (!moviesList || isLoading) {
+  	if (isLoading) {
 			return (
 			  <div style={{ marginTop: '100px', textAlign: 'center'}}>
 			    <Spin tip='Gimme a sec....' size='large' />
 			  </div>
 		   )
 	  }
+
+    if (!moviesList) {
+      return (
+        <div>Search for something</div>
+      )
+    }
 
     const movies = moviesList.map((movie, idx) => {
     return (

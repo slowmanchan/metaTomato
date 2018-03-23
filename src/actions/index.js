@@ -139,11 +139,13 @@ export function requestFetchMovies() {
 }
 
 export function fetchMoviesThunk(movie) {
+
   return dispatch => {
     dispatch(requestFetchMovies())
 
-    return axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)
-      .then((data) => dispatch(fetchMoviesSuccess(data)))
+
+  return axios.get(`${ROOT_URL}${API_KEY}&s=${movie}`)
+     .then((data) => dispatch(fetchMoviesSuccess(data)))
 
   }
 }
