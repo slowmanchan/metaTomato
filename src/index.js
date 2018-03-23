@@ -16,8 +16,11 @@ import SearchResultsContainer from './containers/SearchResultsContainer';
 import MovieShowContainer from './containers/MovieShowContainer';
 import AppLayout from './components/AppLayout';
 import SignupContainer from './containers/SignupContainer';
+import SearchResultsWithInput from './components/SearchResultsWithInput';
+import LoginContainer from './containers/LoginContainer';
 
 require('../style/style.scss')
+
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk, ReduxPromise)(createStore);
 
@@ -27,6 +30,8 @@ ReactDOM.render(
       <div>
         <AppLayout>
           <Switch>
+            <Route path='/login' component={LoginContainer} />
+            <Route path='/search-results-v2' component={SearchResultsWithInput} />
             <Route path='/sign-up' component={SignupContainer} />
             <Route path='/test' component={SearchResultsContainer} />
             <Route path='/favorites' component={FavoritesList} />

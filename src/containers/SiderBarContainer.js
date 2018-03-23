@@ -5,20 +5,20 @@ class SiderBarContainer extends Component {
     constructor(props) {
 	  super(props);
 	  this.state = {
-		collapsed: false
+		collapsed: true
 	  };
 	  this.onCollapse = this.onCollapse.bind(this);
 	}
-	
+
 	onCollapse(collapsed) {
 		this.setState({ collapsed });
 	}
-	
+
 	render() {
 		return (
-		  <SiderBar 
-			onCollapse={this.onCollapse}
-			collapsed={this.state.collapsed}
+		  <SiderBar
+        onCollapse={this.onCollapse}
+        collapsed={this.state.collapsed}
 		  />
 		)
 	}

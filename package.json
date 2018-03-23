@@ -37,6 +37,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.1",
     "file-loader": "^1.1.10",
+    "less": "^2.7.3",
+    "less-loader": "^4.1.0",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.2",
     "react": "^15.5.4",

@@ -34,7 +34,7 @@ class LoginContainer extends Component {
     })
     .then((res) => {
       Auth.authenticateUser(res.data.token, res.data.user.email, res.data.user.name);
-      this.props.handleOk();
+
       message.success('You have logged in Successfully!!');
       this.setState({
         isLoading: false
@@ -42,6 +42,7 @@ class LoginContainer extends Component {
       this.props.history.push('/');
     })
     .catch((errors) => {
+      console.log(errors)
       this.setState({
         errorData: errors.response.data,
         isLoading: false

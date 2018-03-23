@@ -48,7 +48,7 @@ class Home extends Component {
 
     const moviesList = upComingMovies.slice(6, 14).map((movie) => {
       return (
-        <Col xs={24} md={6}>
+        <Col key={uniqid()} xs={24} md={6}>
           <Card
             hoverable
             style={{margin: '10px'}}
@@ -69,6 +69,7 @@ class Home extends Component {
           <div style={{ margin: '20px'}}>
             <Col xs={24} >
               <Carousel
+                effect='fade'
                 autoplay
                 style={{background: 'black'}}>
                 {movies}
@@ -79,7 +80,7 @@ class Home extends Component {
         </Row>
         <Row>
           <div style={{margin: '20px'}}>
-            <h1>Upcoming Movies</h1>
+            <h1 style={{margin: '60px 10px', fontWeight: '800'}}>Upcoming Movies</h1>
             <div>
               {moviesList}
             </div>

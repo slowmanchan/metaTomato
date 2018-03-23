@@ -40,12 +40,14 @@ class ProfileMenu extends  Component {
     );
 
     return (
-      <Dropdown overlay={menu} trigger={['click']}>
-        <Avatar >
-          {localStorage.getItem('name')}
-        </Avatar>
-      </Dropdown>
-    )
+      <div style={this.props.style}>
+        <Dropdown overlay={menu} trigger={['click']}>
+          <Avatar >
+            {localStorage.getItem('name')}
+          </Avatar>
+        </Dropdown>
+      </div>
+        )
   }
 }
 
