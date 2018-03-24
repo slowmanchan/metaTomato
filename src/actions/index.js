@@ -12,6 +12,9 @@ export const REQUEST_FETCH_MOVIE = 'REQUEST_FETCH_MOVIE';
 export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES';
 export const REQUEST_ADD_FAVORITE = 'REQUEST_ADD_FAVORITE';
 
+export const REQUEST_FETCH_ACTORS = 'REQUEST_FETCH_ACTORS';
+export const FETCH_ACTORS_SUCCESS = 'FETCH_ACTORS_SUCCESS';
+
 export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
@@ -19,17 +22,20 @@ export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 export const REQUEST_FETCH_UPCOMING_MOVIES = 'REQUEST_FETCH_UPCOMING_MOVIES';
 export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
 
+export const REQUEST_MULTI_SEARCH = 'REQUEST_MULTI_SEARCH';
+export const MULTI_SEARCH_SUCCESS = 'MULTI_SEARCH_SUCCESS';
+
 const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
 
-const TMDB_URL = 'https://api.themoviedb.org';
-const TMDB_API_KEY = 'c9f885213cf6ff2087da9d18287a8f78';
+const TMDB_URL = 'https://api.themoviedb.org/3';
+const TMDB_API_KEY = 'api_key=c9f885213cf6ff2087da9d18287a8f78';
 
 export function fetchUpcomingMovies() {
   return dispatch => {
     dispatch(requestFetchUpcomingMovies())
 
-    return axios.get(`${TMDB_URL}/3/movie/upcoming?api_key=${TMDB_API_KEY}`)
+    return axios.get(`${TMDB_URL}/movie/upcoming?${TMDB_API_KEY}`)
           .then((data) => dispatch(fetchUpcomingMoviesSuccess(data)))
 
   }
@@ -176,4 +182,48 @@ export function fetchMovieThunk(id) {
 		return axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
 		  .then((data) => dispatch(fetchMovieSuccess(data)))
 	}
+}
+
+export function requestFetchActors() {
+  return {
+    type: REQUEST_FETCH_ACTORS
+  }
+}
+
+export function fetchActors(id) {
+  return dispatch => {
+    dispatch(requestFetchActors())
+
+    return axios.get(`${TMDB_URL}${id}/credits?${TMDB_API_KEY}`)
+      .then((data) => dispatch(fetchActorsSuccess(data)))
+  }
+}
+
+export function fetchActorsSuccess(data) {
+  return {
+    type: FETCH_ACTORS_SUCCESS,
+    payload: data
+  }
+}
+
+export function requestMultiSearch() {
+  return {
+    type: REQUEST_MULTI_SEARCH
+  }
+}
+
+export function multiSearchSuccess(data) {
+  return {
+    type: MULTI_SEARCH_SUCCESS,
+    payload: data
+  }
+}
+
+export function multiSearch(searchTerm) {
+  return dispatch => {
+    dispatch(requestMultiSearch())
+
+    return axios.get(`${TMDB_URL}/search/multi?${TMDB_API_KEY}&query=${searchTerm}`)
+      .then((data) => dispatch(multiSearchSuccess(data)))
+  }
 }

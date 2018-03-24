@@ -12,6 +12,7 @@ const TabPane = Tabs.TabPane;
 class MovieShow extends Component {
 	componentDidMount() {
 		this.props.fetchMovieThunk(this.props.match.params.id)
+		this.props.fetchActors(this.props.match.params.id)
 	}
 
 	render() {
@@ -80,9 +81,11 @@ class MovieShow extends Component {
 				</Row>
 				<Divider/>
 				<Row>
+
 					<Col>
 						<Tabs defaultActiveKey="1">
 							<TabPane tab={<span><Icon type="person" />People</span>} key="1">
+
 								<h2>Actors</h2>
 								<p>{movie.Actors}</p>
 								<h2>Writers</h2>

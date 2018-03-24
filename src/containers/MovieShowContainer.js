@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchMovieThunk } from '../actions';
+import { fetchMovieThunk, fetchActors } from '../actions';
 import MovieShow from '../components/MovieShow';
 
 function mapStateToProps(state) {
@@ -11,7 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchMovieThunk: (id) => dispatch(fetchMovieThunk(id))
+		fetchMovieThunk: (id) => dispatch(fetchMovieThunk(id)),
+    fetchActors: (id) => dispatch(fetchActors(id))
 	}
 }
 

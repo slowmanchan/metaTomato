@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import SearchResultsContainer from '../containers/SearchResultsContainer';
+import SearchResultsV2 from './SearchResultsV2';
 import { connect } from 'react-redux';
 import { fetchMoviesThunk } from '../actions';
-import { debounce } from 'lodash';
+import { multiSearch } from '../actions';
+import _ from 'lodash';
 
 class SearchResultsWithInput extends Component {
   constructor(props) {
@@ -17,8 +19,7 @@ class SearchResultsWithInput extends Component {
 
   handleInputChange(e) {
     const { value } = e.target
-
-    this.props.fetchMoviesThunk(value)
+    this.props.multiSearch(value)
   }
 
   render() {
@@ -50,11 +51,11 @@ class SearchResultsWithInput extends Component {
           />
         </div>
         <div>
-          <SearchResultsContainer/>
+          <SearchResultsV2/>
         </div>
       </div>
     )
   }
 }
 
-export default connect(null, { fetchMoviesThunk })(SearchResultsWithInput);
+export default connect(null, { multiSearch })(SearchResultsWithInput);
