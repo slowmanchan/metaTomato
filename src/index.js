@@ -12,11 +12,10 @@ import FavoritesList from './components/favorites-list';
 import reducers from './reducers';
 
 import Home from './components/home';
-import SearchResultsContainer from './containers/SearchResultsContainer';
+import SearchV2Container from './containers/SearchV2Container';
 import MovieShowContainer from './containers/MovieShowContainer';
 import AppLayout from './components/AppLayout';
 import SignupContainer from './containers/SignupContainer';
-import SearchResultsWithInput from './components/SearchResultsWithInput';
 import LoginContainer from './containers/LoginContainer';
 
 require('../style/style.scss')
@@ -31,11 +30,9 @@ ReactDOM.render(
         <AppLayout>
           <Switch>
             <Route path='/login' component={LoginContainer} />
-            <Route path='/search-results-v2' component={SearchResultsWithInput} />
+            <Route path='/search-results-v2' component={SearchV2Container} />
             <Route path='/sign-up' component={SignupContainer} />
-            <Route path='/test' component={SearchResultsContainer} />
             <Route path='/favorites' component={FavoritesList} />
-            <Route path='/search-results' component={SearchResultsContainer} />
             <Route path='/movie/:id' component={MovieShowContainer} />
             <Route path='/' component={Home} />
           </Switch>
