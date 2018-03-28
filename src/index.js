@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
+import createDebounce from 'redux-debounced';
 import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 
@@ -21,7 +22,9 @@ import LoginContainer from './containers/LoginContainer';
 require('../style/style.scss')
 
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk, ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(
+  createDebounce(), ReduxThunk, ReduxPromise, 
+)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>

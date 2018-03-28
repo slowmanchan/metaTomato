@@ -220,10 +220,20 @@ export function multiSearchSuccess(data) {
 }
 
 export function multiSearch(searchTerm) {
-  return dispatch => {
-    dispatch(requestMultiSearch())
+  const thunk = dispatch => {
+  dispatch(requestMultiSearch())
 
-    return axios.get(`${TMDB_URL}/search/multi?${TMDB_API_KEY}&query=${searchTerm}`)
-      .then((data) => dispatch(multiSearchSuccess(data)))
+  return axios.get(`${TMDB_URL}/search/multi?${TMDB_API_KEY}&query=${searchTerm}`)
+    .then((data) => dispatch(multiSearchSuccess(data)))
   }
+
+  thunk.meta = {
+    debounce: {
+      time: 300,
+      key: 'SEARCH'
+    }
+  }
+
+  return thunk
+
 }

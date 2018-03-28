@@ -51,6 +51,7 @@
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
     "redux": "^3.6.0",
+    "redux-debounced": "^0.4.0",
     "redux-form": "^6.6.3",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
