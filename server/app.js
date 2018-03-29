@@ -3,7 +3,7 @@ var path = require('path');
 const config = require('./config');
 // connect to the db and load models
 require('./models').connect(config.dbUri);
-
+//  mongodb://localhost/react_app
 
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -42,6 +42,9 @@ const localLoginStrategy = require('./passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
+app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/public/index.html');
+});
 
 app.use('/api', authCheckMiddleware);
 //routes
