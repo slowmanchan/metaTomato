@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 // tell app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../')));
 
 app.use(passport.initialize());
 
@@ -42,8 +42,8 @@ const localLoginStrategy = require('./passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/public/index.html');
+app.get('/*', function(request, response) {
+  response.sendFile(path.join(__dirname, '../index.html'))
 });
 
 app.use('/api', authCheckMiddleware);

@@ -31,13 +31,6 @@ module.exports = {
       loader: 'file-loader',
     },
     {
-      test: /\.less$/,
-      loader: 'less-loader',
-      options: {
-               javascriptEnabled: true
-           }
-    },
-    {
       test: /\.svg$/,
       loader: 'svg-inline-loader'
     }],
