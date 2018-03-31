@@ -1,12 +1,7 @@
-# React-Redux-Starter-Updated
+# meta Tomato 
 
-An updated boilerplate from Stephen Girder.
+An application that consumes the TMDB and OMDB Rest APIs.
 
-* axios
-* react
-* react-redux
-* react-router-dom
-* redux-promise
-* redux-form
-* webpack
-* lodash
+Built with React, Redux, Node.js, MongoDB and Express.js
+
+The app allows you to search for a movie, add favorites, view favorites and view individual movie ratings from rotten tomatoes, IMDB and metacritic.
