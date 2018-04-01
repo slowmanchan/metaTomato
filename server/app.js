@@ -4,7 +4,7 @@ const config = require('./config');
 // connect to the db and load models
 require('./models').connect(config.dbUri);
 //  mongodb://localhost/react_app
-
+// mongodb://heroku_lkxhj5r9:1j3ndbl2n28rjvnlgjfj3fl6md@ds131329.mlab.com:31329/heroku_lkxhj5r9
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');

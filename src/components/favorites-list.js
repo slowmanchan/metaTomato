@@ -43,7 +43,7 @@ class FavoritesList extends Component {
 
 	return (
 				<div>
-					<h1>Favorites</h1>
+					<h1>Favorite</h1>
 					<Row>{favoritesList}</Row>
 				</div>
 	  )

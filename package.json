@@ -5,6 +5,7 @@
   "main": "index.js",
   "repository": "",
   "scripts": {
+    "dev": "nodemon ./server/bin/www && webpack-dev-server --hot",
     "build": "webpack --config webpack.config.js",
     "start": "npm run build && NODE_ENV=production node ./server/bin/www"
   },

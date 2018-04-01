@@ -9,7 +9,7 @@ import createDebounce from 'redux-debounced';
 import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 
-import FavoritesList from './components/favorites-list';
+import FavoritesList from './containers/FavoritesContainer';
 import reducers from './reducers';
 
 import Home from './components/home';
@@ -23,7 +23,7 @@ require('../style/style.scss')
 
 
 const createStoreWithMiddleware = applyMiddleware(
-  createDebounce(), ReduxThunk, ReduxPromise, 
+  createDebounce(), ReduxThunk, ReduxPromise,
 )(createStore);
 
 ReactDOM.render(

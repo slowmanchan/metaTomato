@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchFavoritesThunk: () => dispatch(fetchFavoritesThunk())
+		fetchFavoritesThunk: () => dispatch(fetchFavoritesThunk()),
 		deleteFavoriteThunk: (id) => dispatch(deleteFavoriteThunk(id))
 	}
 }

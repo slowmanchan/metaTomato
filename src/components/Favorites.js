@@ -4,9 +4,8 @@ import uniqid from 'uniqid';
 import { Card, Row, Col, Spin } from 'antd';
 const { Meta } = Card;
 
-const Favorites = (props) => {
-	const { favorites, isLoading } = this.props
-
+const Favorites = ({ favorites, isLoading } ) => {
+	
 	if (!favorites || isLoading) {
 		return (
 		  <div style={{ marginTop: '100px', textAlign: 'center'}}>
