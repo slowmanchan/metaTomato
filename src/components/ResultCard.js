@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { Card, Col} from 'antd';
 const { Meta } = Card;
 
-const ResultCard = ({ title, imgSrc }) => {
+const ResultCard = ({ title, imgSrc, id }) => {
   return (
+
     <Col  xs={24} sm={12} md={8} lg={4}>
-      <Link to={`/movie/`}>
+      <Link to={`/movie/${id}`}>
         <Card
           style={{width: '170px', margin: '20px 10px'}}
           hoverable

@@ -4,6 +4,7 @@ import { fetchUpcomingMovies } from '../actions';
 import uniqid from 'uniqid';
 import axios from 'axios';
 import Auth from '../modules/Auth';
+import { Link } from 'react-router-dom';
 import { Carousel, Row, Col, List, Card } from 'antd';
 const { Meta } = Card;
 
@@ -31,17 +32,21 @@ class Home extends Component {
 
     const movies = upComingMovies.slice(0,6).map((movie) => {
       return (
-        <div style={{ position: 'relative' }} key={uniqid()}>
-          <img
-            style={{ marginLeft: 'auto', overflow: 'hidden'}}
-            src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-          />
 
-          <div style={{  position: 'absolute', bottom: '48px', left: '46px', color: 'white' }}>
-            <h1 style={{ color: 'white'}}>{movie.title}</h1>
-            <p>{movie.overview.slice(0, 60)}...</p>
-          </div>
-        </div>
+            <div style={{ position: 'relative' }} key={uniqid()}>
+              <Link to={`/movie/${movie.id}`}>
+                <img
+                  style={{ marginLeft: 'auto', overflow: 'hidden'}}
+                  src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                />
+              </Link>
+                <div style={{  position: 'absolute', bottom: '48px', left: '46px', color: 'white' }}>
+                  <h1 style={{ color: 'white'}}>{movie.title}</h1>
+                  <p>{movie.overview.slice(0, 60)}...</p>
+                </div>
+
+              </div>
+
 
       )
     })
@@ -49,20 +54,22 @@ class Home extends Component {
     const moviesList = upComingMovies.slice(6, 14).map((movie) => {
       return (
         <Col key={uniqid()} xs={24} md={6}>
-          <Card
-            hoverable
-            style={{margin: '10px'}}
-            cover={<img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>}
-          >
-            <Meta
-              title={movie.title}
-              description={movie.overview.slice(0, 100)}
-            />
-          </Card>
+          <Link to={`/movie/${movie.id}`}>
+            <Card
+              hoverable
+              style={{margin: '10px'}}
+              cover={<img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>}
+            >
+              <Meta
+                title={movie.title}
+                description={movie.overview.slice(0, 100)}
+              />
+            </Card>
+          </Link>
         </Col>
           )
     })
-     console.log(moviesList)
+     console.log(upComingMovies)
     return (
       <div>
         <Row>

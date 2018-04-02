@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchFavorites, deleteFavorite } from '../actions'
 import Favorites from '../components/Favorites';
 
 function mapStateToProps(state) {
@@ -10,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchFavoritesThunk: () => dispatch(fetchFavoritesThunk()),
-		deleteFavoriteThunk: (id) => dispatch(deleteFavoriteThunk(id))
+		fetchFavorites: () => { dispatch(fetchFavorites())},
+		deleteFavorite: (id) => { dispatch(deleteFavorite(id)) }
 	}
 }
 

@@ -11,7 +11,7 @@ class AddFavorite extends Component {
       loading={this.props.isButtonLoading}
 	    onClick={() => {
         this.props.addFavoriteThunk(this.props.movie)
-        
+
 
       }}
       icon='heart'

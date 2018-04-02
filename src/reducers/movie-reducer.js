@@ -4,7 +4,7 @@ import {
   REQUEST_FETCH_UPCOMING_MOVIES, FETCH_UPCOMING_MOVIES_SUCCESS,
   FETCH_MOVIE_SUCCESS, REQUEST_FETCH_MOVIE, REQUEST_ADD_FAVORITE,
   FETCH_ACTORS_SUCCESS, REQUEST_FETCH_ACTORS, MULTI_SEARCH_SUCCESS,
-  REQUEST_MULTI_SEARCH
+  REQUEST_MULTI_SEARCH, REQUEST_MOVIE_SEARCH, FETCH_RATINGS, FETCH_CREDITS
 } from '../actions/index';
 import _ from 'lodash';
 
@@ -41,13 +41,17 @@ export default function(state = {
     case REQUEST_FETCH_ACTORS:
        return { ...state, isLoading: true }
     case FETCH_ACTORS_SUCCESS:
-       console.log(action.payload.data)
        return { ...state, actors: action.payload.data, isLoading: false}
     case REQUEST_MULTI_SEARCH:
        return { ...state, isLoading: true }
     case MULTI_SEARCH_SUCCESS:
-       console.log(action.payload.data.results)
        return { ...state, resultsList: action.payload.data.results, isLoading: false }
+    case REQUEST_MOVIE_SEARCH:
+       return { ...state, isLoading: true}
+    case FETCH_RATINGS:
+       return { ...state, ratings: action.payload.data.Ratings }
+    case FETCH_CREDITS:
+       return { ...state, credits: action.payload.data.cast }
     default:
       return state;
   }

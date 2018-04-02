@@ -22,7 +22,8 @@ router.post('/favorites', function(req, res, next) {
   var favorite = new Favorite({
     title: req.body.title,
     poster: req.body.poster,
-    imdbID: req.body.imdbID
+    imdbID: req.body.imdbID,
+    id: req.body.id
 
   })
   favorite.save(function(err) {

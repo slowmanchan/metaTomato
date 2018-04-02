@@ -18,7 +18,7 @@ const SearchResultsV2Container = ({resultsList, isLoading}) => {
       </div>
     )
   }
-  
+
   const IMG_URL = 'https://image.tmdb.org/t/p/w500/'
   const tvList = [];
   const pplList = [];
@@ -27,11 +27,12 @@ const SearchResultsV2Container = ({resultsList, isLoading}) => {
   resultsList.forEach((result) => {
     if (result.media_type === 'movie') {
         movieList.push(
-          <ResultCard
-            key={uniqid()}
-            imgSrc={`${IMG_URL}${result.poster_path}`}
-            title={result.title}
-          />
+            <ResultCard
+              key={uniqid()}
+              id={result.id}
+              imgSrc={`${IMG_URL}${result.poster_path}`}
+              title={result.title}
+            />
         )
     } else if (result.media_type === 'tv'){
         tvList.push(

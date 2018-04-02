@@ -42,10 +42,6 @@ const localLoginStrategy = require('./passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
-app.get('/*', function(request, response) {
-  response.sendFile(path.join(__dirname, '../index.html'))
-});
-
 app.use('/api', authCheckMiddleware);
 //routes
 app.use('/', index);
@@ -54,6 +50,12 @@ app.use('/users', users);
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+
+app.get('/*', function(request, response) {
+  response.sendFile(path.join(__dirname, '../index.html'))
+});
+
+
 
 
 // catch 404 and forward to error handler

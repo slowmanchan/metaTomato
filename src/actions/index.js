@@ -25,11 +25,58 @@ export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
 export const REQUEST_MULTI_SEARCH = 'REQUEST_MULTI_SEARCH';
 export const MULTI_SEARCH_SUCCESS = 'MULTI_SEARCH_SUCCESS';
 
+export const REQUEST_MOVIE_SEARCH = 'REQUEST_MOVIE_SEARCH';
+export const FETCH_RATINGS = 'FETCH_RATINGS';
+
+export const FETCH_CREDITS = 'FETCH_CREDITS';
+
 const ROOT_URL = 'http://www.omdbapi.com/?';
 const API_KEY = 'apikey=eda26e6d';
 
 const TMDB_URL = 'https://api.themoviedb.org/3';
 const TMDB_API_KEY = 'api_key=c9f885213cf6ff2087da9d18287a8f78';
+
+export function requestMovieSearch() {
+  return {
+    type: REQUEST_FETCH_MOVIE
+  }
+}
+
+export function fetchCredits(id) {
+  const request = axios.get(`${TMDB_URL}/movie/${id}/credits?${TMDB_API_KEY}`)
+  return {
+    type: FETCH_CREDITS,
+    payload: request
+  }
+}
+
+export function fetchMovie(id) {
+  return dispatch => {
+    dispatch(requestMovieSearch())
+
+    return axios.get(`${TMDB_URL}/movie/${id}?${TMDB_API_KEY}`)
+      .then((data) => {
+        dispatch(fetchCredits(id))
+        dispatch(fetchMovieSuccess(data))
+        dispatch(fetchRatings(data))
+
+      })
+  }
+}
+
+export function fetchMovieSuccess(data) {
+	return {
+		type: FETCH_MOVIE_SUCCESS,
+		payload: data
+	}
+}
+
+export function fetchMoviesSuccess(data) {
+  return {
+    type: FETCH_MOVIES_SUCCESS,
+    payload: data
+  }
+}
 
 export function fetchUpcomingMovies() {
   return dispatch => {
@@ -40,6 +87,8 @@ export function fetchUpcomingMovies() {
 
   }
 }
+
+
 
 export function requestFetchUpcomingMovies() {
   return {
@@ -57,7 +106,7 @@ export function fetchUpcomingMoviesSuccess(data) {
 
 export function addFavorite(movie) {
   const url = '/api/favorites';
-  const data = { 'title': movie.Title, 'poster': movie.Poster, 'imdbID': movie.imdbID }
+  const data = { 'title': movie.title, 'poster': movie.poster_path, 'imdbID': movie.imdb_id, 'id': movie.id }
   const headers = { headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     'Authorization': `bearer ${Auth.getToken()}`
@@ -156,12 +205,8 @@ export function fetchMoviesThunk(movie) {
   }
 }
 
-export function fetchMoviesSuccess(data) {
-  return {
-    type: FETCH_MOVIES_SUCCESS,
-    payload: data
-  }
-}
+
+
 
 export function requestFetchMovie() {
 	return {
@@ -169,19 +214,29 @@ export function requestFetchMovie() {
 	}
 }
 
-export function fetchMovieSuccess(data) {
-	return {
-		type: FETCH_MOVIE_SUCCESS,
-		payload: data
-	}
-}
+
 export function fetchMovieThunk(id) {
 	return dispatch => {
 		dispatch(requestFetchMovie())
 
 		return axios.get(`${ROOT_URL}${API_KEY}&i=${id}`)
-		  .then((data) => dispatch(fetchMovieSuccess(data)))
+		  .then((data) => {
+        dispatch(fetchMovieSuccess(data))
+
+      })
 	}
+}
+
+export function fetchRatings(data) {
+  const request = axios.get(`${ROOT_URL}${API_KEY}&i=${data.data.imdb_id}`)
+    .then((data) => {
+      return data
+    })
+
+  return {
+    type: FETCH_RATINGS,
+    payload: request
+  }
 }
 
 export function requestFetchActors() {
