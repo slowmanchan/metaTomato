@@ -13,7 +13,7 @@ const Person = ({ name, imgSrc, id, character }) => {
           cover={<img style={{height: '250px'}} alt="example" src={`https://image.tmdb.org/t/p/w500/${imgSrc}`} />}>
           <Meta
             title={character ? character : 'unknown'}
-            description={name}
+            description={name.slice(0, 15)}
           />
         </Card>
       </Link>

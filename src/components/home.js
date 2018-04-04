@@ -62,7 +62,7 @@ class Home extends Component {
             >
               <Meta
                 title={movie.title}
-                description={movie.overview.slice(0, 100)}
+                description={`${movie.overview.slice(0, 140)}...`}
               />
             </Card>
           </Link>
